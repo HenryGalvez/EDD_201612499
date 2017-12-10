@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1512802626 source:c:\users\usuario\desktop\2s2017\tarea 1\lista\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ListaDoble.h"
+
+1512802375 c:\users\usuario\desktop\2s2017\tarea 1\lista\listadoble.h
+
