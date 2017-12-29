@@ -25,7 +25,7 @@ public partial class gestion_juegos : System.Web.UI.Page
         }
         else
         {
-            a.MostrarTableros();
+            a.MostrarTableros("");
             LabelNivel1.Text = "Unidades en el Nivel 1: "+a.ObtenerUnivel0();
             LabelNivel2.Text = "Unidades en el Nivel 2: " + a.ObtenerUnivel1();
             LabelNivel3.Text = "Unidades en el Nivel 3: " + a.ObtenerUnivel2();
@@ -86,13 +86,12 @@ public partial class gestion_juegos : System.Web.UI.Page
             ++submarino;
         }
         a.InsertarUnidadesMatriz("" + Session["usuario"], tipo, IFila.Text.Trim(), IColumna.Text.Trim(), 1, nivel);
+        IColumna.Text = tipo;
         Response.Redirect("gestion-juegos.aspx");
     }
 
-    protected void BIjuegos_Click(object sender, EventArgs e)
-    {
-        a.AgregarJuego(INickBase.Text, INickOponente.Text, Convert.ToInt32(IUD.Text), Convert.ToInt32(IUS.Text), Convert.ToInt32(IUDes.Text), Convert.ToByte(IG.Text));
-    }
+    
+    
 
     protected void BSU_Click(object sender, EventArgs e)
     {
@@ -213,10 +212,18 @@ public partial class gestion_juegos : System.Web.UI.Page
 
 
                     }
-                    
 
+
+                    if (estado == 1)
+                    {
+                        a.InsertarUnidadesMatriz(jugador, tipo, (fila.Trim()), (columna.Trim()), estado, nivel);
+                    }
+                    else
+                    {
+                        a.InsertarUnidadesMatrizDestruido(jugador, tipo, (fila.Trim()), (columna.Trim()), estado, nivel);
+                    }
+                    
                 
-                a.InsertarUnidadesMatriz(jugador,tipo,(fila.Trim()), (columna.Trim()), estado,nivel);
                 }
 
                 file.Close();
@@ -227,7 +234,7 @@ public partial class gestion_juegos : System.Web.UI.Page
             }
         }
 
-        a.MostrarTableros();
+        a.MostrarTableros("");
         //Response.Redirect("gestion-juegos.aspx");
     }
 
@@ -348,105 +355,63 @@ public partial class gestion_juegos : System.Web.UI.Page
         Response.Redirect("gestion-juegos.aspx");
     }
 
-    protected void BSJ_Click(object sender, EventArgs e)
-    {
-        if (FileUploadCSVJuegos.FileName != "")
-        {
-
-            string line;
-            string dir = FileUploadCSVJuegos.PostedFile.FileName;
-
-            int posicion = 0;
-
-            Stream asd = FileUploadCSVJuegos.PostedFile.InputStream;
-
-            string nickBase = "";
-            string nickOponente = "";
-            int UDesplegadas = 0;
-            int USobre = 0;
-            int UDestru = 0;
-            Byte gano = 0;
-
-            string aux = "";
-
-
-            //try
-            {
-                System.IO.StreamReader file = new System.IO.StreamReader(asd);
-
-
-
-                while ((line = file.ReadLine()) != null)
-                {
-
-                    for (int i = 0; i < line.Length; i++)
-                    {
-                        if (line[i] != ',')
-                        {
-
-                            aux += line[i];
-                        }
-                        if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 0)
-                        {
-                            nickBase = aux;
-                            aux = "";
-                            posicion++;
-                        }
-                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 1)
-                        {
-                            nickOponente = aux;
-                            aux = "";
-                            posicion++;
-                        }
-                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 2)
-                        {
-                            UDesplegadas = Convert.ToInt32(aux);
-                            aux = "";
-                            posicion++;
-                        }
-                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 3)
-                        {
-                            USobre = Convert.ToInt32(aux);
-                            aux = "";
-                            posicion++;
-                        }
-                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 4)
-                        {
-                            UDestru = Convert.ToInt32(aux);
-                            aux = "";
-                            posicion++;
-                        }
-                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 5)
-                        {
-                            gano = Convert.ToByte(aux);
-                            aux = "";
-                            posicion = 0;
-                        }
-
-                    }
-
-                    a.AgregarJuego(nickBase, nickOponente, UDesplegadas, USobre, UDestru, gano);
-                }
-
-                file.Close();
-            }
-            //catch (Exception weq)
-            {
-                //Console.WriteLine("" + weq);
-            }
-        }
-    }
+    
 
     protected void Bbuscar_Click(object sender, EventArgs e)
     {
 
-        a.MostrarTableros();
+        a.MostrarTableros("");
 
     }
 
     protected void BEliminar_Click(object sender, EventArgs e)
     {
-        
+        string tipo = (""+DLElimiar.SelectedItem).Trim();
+        int nivel = 0;
+        if (tipo.Equals("Neosatelite"))
+        {
+            
+            nivel = 3;
+            
+        }
+        else if (tipo.Equals("Bombardero"))
+        {
+            
+            nivel = 2;
+            
+        }
+        else if (tipo.Equals("Caza"))
+        {
+            
+            nivel = 2;
+            
+        }
+        else if (tipo.Equals("Helicoptero"))
+        {
+            
+            nivel = 2;
+            
+        }
+        else if (tipo.Equals("Fragata"))
+        {
+            
+            nivel = 1;
+            
+        }
+        else if (tipo.Equals("Crucero"))
+        {
+            
+            nivel = 1;
+            
+        }
+        else if (tipo.Equals("Submarino"))
+        {
+            
+            nivel = 0;
+            
+        }
+        a.EliminarUnidades(EUFila.Text, EUColumna.Text, nivel);
+        Response.Redirect("gestion-juegos.aspx");
 
     }
 

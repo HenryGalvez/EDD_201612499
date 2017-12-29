@@ -11,11 +11,27 @@ class Matriz
 {
     public Pivote primero;
     public int count;
-
+    public int neosatelite;
+    public int bombardero;
+    public int caza;
+    public int helicoptero;
+    public int fragata;
+    public int crucero;
+    public int submarino;
+    
 
     public Matriz()
     {
         primero = new Pivote(1);
+        
+        neosatelite = 1;
+        bombardero = 1;
+        caza = 1;
+        helicoptero = 1;
+        fragata = 1;
+        crucero = 1;
+        submarino = 1;
+        
         count = 0;
         Pivote a = new Pivote(0);
         Pivote c = new Pivote(2);
@@ -380,10 +396,69 @@ class Matriz
         
     }
 
-
-    public void Eliminar(string fila, string columna)
+    public void EliminarOtrosNiveles(NodoMatriz guia,int nivel )
     {
-        Header aux = primero.columnas;
+        NodoMatriz nivelS;
+        NodoMatriz nivelA;
+
+        if (nivel == 0)
+        {
+            nivelS = guia.adelante;
+            if (nivelS != null)
+            {
+                nivelS.atras = null;
+                guia.adelante = null;
+            }
+        }
+        else if (nivel == 1)
+        {
+            nivelS = guia.adelante;
+            if (nivelS != null)
+            {
+                nivelS.atras = null;
+                guia.adelante = null;
+            }
+
+            nivelA = guia.atras;
+            if (nivelA != null)
+            {
+                nivelA.adelante = null;
+                guia.atras = null;
+            }
+
+        }
+        else if (nivel == 2)
+        {
+            nivelS = guia.adelante;
+            if (nivelS != null)
+            {
+                nivelS.atras = null;
+                guia.adelante = null;
+            }
+
+            nivelA = guia.atras;
+            if (nivelA != null)
+            {
+                nivelA.adelante = null;
+                guia.atras = null;
+            }
+        }
+        else if (nivel == 3)
+        {
+            nivelA = guia.atras;
+            if (nivelA != null)
+            {
+                nivelA.adelante = null;
+                guia.atras = null;
+            }
+        }
+
+    }
+
+
+    public void Eliminar(Pivote piv,string fila, string columna)
+    {
+        Header aux = piv.columnas;
         while (aux != null)
         {
 
@@ -416,15 +491,21 @@ class Matriz
         {
             if (ae.siguiente == null && ae.abajo == null)
             {
+                EliminarOtrosNiveles(ae, piv.nivel);
+
                 NodoMatriz ant1 = ae.anterior;
                 NodoMatriz ant2 = ae.arriba;
                 ae.arriba = null;
                 ae.anterior = null;
                 ant1.siguiente = null;
                 ant2.abajo = null;
+
+                
+
             }
             else if (ae.siguiente != null && ae.abajo == null)
             {
+                EliminarOtrosNiveles(ae, piv.nivel);
                 NodoMatriz ant1 = ae.anterior;
                 NodoMatriz ant2 = ae.arriba;
                 NodoMatriz sig = ae.siguiente;
@@ -438,6 +519,7 @@ class Matriz
             }
             else if (ae.siguiente == null && ae.abajo != null)
             {
+                EliminarOtrosNiveles(ae, piv.nivel);
                 NodoMatriz ant1 = ae.anterior;
                 NodoMatriz ant2 = ae.arriba;
                 NodoMatriz sig = ae.abajo;
@@ -451,6 +533,7 @@ class Matriz
             }
             else if (ae.siguiente != null && ae.abajo != null)
             {
+                EliminarOtrosNiveles(ae, piv.nivel);
                 NodoMatriz ant1 = ae.anterior;
                 NodoMatriz ant2 = ae.arriba;
                 NodoMatriz sig = ae.siguiente;
@@ -467,7 +550,7 @@ class Matriz
             }
         }
 
-        aux = primero.columnas;
+        aux = piv.columnas;
         if (aux.siguiente != null)
         {
             aux = aux.siguiente;
@@ -496,7 +579,7 @@ class Matriz
             }
         }
 
-        aux = primero.filas;
+        aux = piv.filas;
         if (aux.siguiente != null)
         {
             aux = aux.siguiente;
@@ -576,14 +659,16 @@ class Matriz
 
     }*/
     //int cou;
-    public void GenerarGrafo(Header guia, int x, int y,string nombrearchi)
+    public void GenerarGrafo(Header guia, int x, int y,string nombrearchi,string opcion)
     {
         //cou = 0;
         string texto = "";
 
         texto += "digraph{" + Environment.NewLine;
 
-        texto += MatrizGrafo(guia, x, y);
+
+        texto += MatrizGrafo(guia, x, y,opcion);
+        
 
 
 
@@ -642,7 +727,7 @@ class Matriz
 
     }
 
-    public string MatrizGrafo(Header guia, int x, int y)
+    public string MatrizGrafo(Header guia, int x, int y, string opcion)
     {
         string txt = "";
         int countx = 1;
@@ -735,8 +820,25 @@ class Matriz
                             
                             if (string.Compare("" + Convert.ToChar(county), us.columna, true) == 0 && string.Compare(""+countx,aux.valor,true) == 0 )
                             {
-                                txt += "<td> Tipo: " + us.nombre + "<br/>Movimiento: " + us.movimiento + "<br/>Alcance: "
+                                if (opcion.Equals(""))
+                                {
+                                    txt += "<td> Tipo: " + us.nombre + "<br/>Movimiento: " + us.movimiento + "<br/>Alcance: "
                                     + us.alcance + "<br/>Daño: " + us.daño + "<br/>Vida: " + us.vida + "<br/>Jugador: " + us.jugador + " </td>" + Environment.NewLine;
+                                }
+                                else
+                                {
+                                    if (us.jugador.Equals(opcion) && us.nombre.Contains("Submarino"))
+                                    {
+                                        txt += "<td> Tipo: " + us.nombre + "<br/>Movimiento: " + us.movimiento + "<br/>Alcance: "
+                                    + us.alcance + "<br/>Daño: " + us.daño + "<br/>Vida: " + us.vida + "<br/>Jugador: " + us.jugador + " </td>" + Environment.NewLine;
+                                    }
+                                    else if (us.nombre.Contains("Submarino") == false)
+                                    {
+                                        txt += "<td> Tipo: " + us.nombre + "<br/>Movimiento: " + us.movimiento + "<br/>Alcance: "
+                                    + us.alcance + "<br/>Daño: " + us.daño + "<br/>Vida: " + us.vida + "<br/>Jugador: " + us.jugador + " </td>" + Environment.NewLine;
+                                    }
+                                }
+                                
                                 us = us.siguiente;
                                 if (us != null)
                                 {
@@ -785,6 +887,75 @@ class Matriz
             txt += "</table>>] a; ";
         }
         return txt;
+    }
+
+    public void Vaciar()
+    {
+        count = 0;
+        neosatelite = 1;
+        bombardero = 1;
+        caza = 1;
+        helicoptero = 1;
+        fragata = 1;
+        crucero = 1;
+        submarino = 1;
+        if (primero.columnas.siguiente != null)
+        {
+            Header a = primero.columnas.siguiente;
+            primero.columnas.siguiente = null;
+            a.anterior = null;
+        }
+        if(primero.filas.siguiente != null)
+        {
+            Header a = primero.filas.siguiente;
+            primero.filas.siguiente = null;
+            a.anterior = null;
+        }
+
+
+        if (primero.atras.columnas.siguiente != null)
+        {
+            Header a = primero.atras.columnas.siguiente;
+            primero.atras.columnas.siguiente = null;
+            a.anterior = null;
+        }
+        if (primero.atras.filas.siguiente != null)
+        {
+            Header a = primero.atras.filas.siguiente;
+            primero.atras.filas.siguiente = null;
+            a.anterior = null;
+        }
+
+
+
+        if (primero.adelante.columnas.siguiente != null)
+        {
+            Header a = primero.adelante.columnas.siguiente;
+            primero.adelante.columnas.siguiente = null;
+            a.anterior = null;
+        }
+        if (primero.adelante.filas.siguiente != null)
+        {
+            Header a = primero.adelante.filas.siguiente;
+            primero.adelante.filas.siguiente = null;
+            a.anterior = null;
+        }
+
+
+
+        if (primero.adelante.adelante.columnas.siguiente != null)
+        {
+            Header a = primero.adelante.adelante.columnas.siguiente;
+            primero.adelante.adelante.columnas.siguiente = null;
+            a.anterior = null;
+        }
+        if (primero.adelante.adelante.filas.siguiente != null)
+        {
+            Header a = primero.adelante.adelante.filas.siguiente;
+            primero.adelante.adelante.filas.siguiente = null;
+            a.anterior = null;
+        }
+
     }
     
 }

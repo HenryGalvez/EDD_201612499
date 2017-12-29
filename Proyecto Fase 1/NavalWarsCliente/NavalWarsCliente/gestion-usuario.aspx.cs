@@ -13,6 +13,7 @@ public partial class gestion_usuario : System.Web.UI.Page
         }
         else
         {
+            a.Mostrar();
         }
         
         
@@ -22,11 +23,16 @@ public partial class gestion_usuario : System.Web.UI.Page
     protected void BCrear_Click(object sender, EventArgs e)
     {
         a.Agregar(INick.Text,IPass.Text,ICorreo.Text,0);
+        a.Mostrar();
+        Response.Redirect("gestion-usuario.aspx");
     }
 
     protected void BIjuegos_Click(object sender, EventArgs e)
     {
         a.AgregarJuego(INickBase.Text, INickOponente.Text, Convert.ToInt32(IUD.Text), Convert.ToInt32(IUS.Text), Convert.ToInt32(IUDes.Text),Convert.ToByte(IG.Text));
+        a.Mostrar();
+        Response.Redirect("gestion-usuario.aspx");
+
     }
 
     protected void BSU_Click(object sender, EventArgs e)
@@ -108,6 +114,7 @@ public partial class gestion_usuario : System.Web.UI.Page
             }
         }
         a.Mostrar();
+        Response.Redirect("gestion-usuario.aspx");
     }
 
 
@@ -204,6 +211,7 @@ public partial class gestion_usuario : System.Web.UI.Page
             }
         }
         a.Mostrar();
+        Response.Redirect("gestion-usuario.aspx");
     }
 
     protected void Bbuscar_Click(object sender, EventArgs e)
@@ -254,7 +262,8 @@ public partial class gestion_usuario : System.Web.UI.Page
         {
             a.EliminarUsuario(TxtBuscar.Text);
         }
-        
+        a.Mostrar();
+        Response.Redirect("gestion-usuario.aspx");
     }
 
     protected void BModificar_Click(object sender, EventArgs e)
@@ -262,8 +271,42 @@ public partial class gestion_usuario : System.Web.UI.Page
 
 
         a.Modificar(TxtBuscar.Text, Mnick.Text, Mpass.Text, Mcorreo.Text,Convert.ToByte(Estado.Text));
+        a.Mostrar();
+        Response.Redirect("gestion-usuario.aspx");
 
+    }
 
+    protected void BMjuegos_Click(object sender, EventArgs e)
+    {
+        int desple = -1;
+        int sobre = -1;
+        int destru = -1;
+        
+        if (MLJUdesplegadas.Text != "")
+        {
+            desple = Convert.ToInt32(MLJUdesplegadas.Text);
+        }
+
+        if (MLJUSobre.Text != "")
+        {
+            sobre = Convert.ToInt32(MLJUSobre.Text);
+
+        }
+
+        if (MLJUdestru.Text != "")
+        {
+            destru = Convert.ToInt32(MLJUdestru.Text);
+        }
+        a.ModificarListaJuegos(MLJUsuario.Text, Convert.ToInt32(MLJId.Text)
+            , MLJNickOponente.Text, desple, sobre, destru, Convert.ToByte(MLJGano.Text));
+        a.Mostrar();
+        Response.Redirect("gestion-usuario.aspx");
+    }
+    protected void BEjuegos_Click(object sender, EventArgs e)
+    {
+        a.EliminarListaJuegos(MLJUsuario.Text, Convert.ToInt32(MLJId.Text));
+        a.Mostrar();
+        Response.Redirect("gestion-usuario.aspx");
     }
 
     protected void Logout_Click(object sender, EventArgs e)

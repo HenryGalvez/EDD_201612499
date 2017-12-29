@@ -91,7 +91,11 @@
         <s:complexType />
       </s:element>
       <s:element name="MostrarTableros">
-        <s:complexType />
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="opcion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
       </s:element>
       <s:element name="MostrarTablerosResponse">
         <s:complexType />
@@ -140,6 +144,33 @@
       <s:element name="ModificarResponse">
         <s:complexType />
       </s:element>
+      <s:element name="EliminarListaJuegos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarListaJuegosResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ModificarListaJuegos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="nickOponente" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="desplegadas" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="sobrevivientes" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="destruidas" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="gano_" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarListaJuegosResponse">
+        <s:complexType />
+      </s:element>
       <s:element name="Top10Usuarios">
         <s:complexType />
       </s:element>
@@ -173,6 +204,21 @@
         </s:complexType>
       </s:element>
       <s:element name="InsertarUnidadesMatrizResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InsertarUnidadesMatrizDestruido">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jugador" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tipo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fila" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="columna" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="estado" type="s:unsignedByte" />
+            <s:element minOccurs="1" maxOccurs="1" name="nivel" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertarUnidadesMatrizDestruidoResponse">
         <s:complexType />
       </s:element>
       <s:element name="ConfigurarParametros">
@@ -261,6 +307,52 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ConfigurarJugadores">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfigurarJugadoresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ConfigurarJugadoresResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarUnidades">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fila" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="columna" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="nivel" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarUnidadesResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SetReady">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetReadyResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ComenzarJuego">
+        <s:complexType />
+      </s:element>
+      <s:element name="ComenzarJuegoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ComenzarJuegoResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LoginAdminSoapIn">
@@ -335,6 +427,18 @@
   <wsdl:message name="ModificarSoapOut">
     <wsdl:part name="parameters" element="tns:ModificarResponse" />
   </wsdl:message>
+  <wsdl:message name="EliminarListaJuegosSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarListaJuegos" />
+  </wsdl:message>
+  <wsdl:message name="EliminarListaJuegosSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarListaJuegosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarListaJuegosSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarListaJuegos" />
+  </wsdl:message>
+  <wsdl:message name="ModificarListaJuegosSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarListaJuegosResponse" />
+  </wsdl:message>
   <wsdl:message name="Top10UsuariosSoapIn">
     <wsdl:part name="parameters" element="tns:Top10Usuarios" />
   </wsdl:message>
@@ -352,6 +456,12 @@
   </wsdl:message>
   <wsdl:message name="InsertarUnidadesMatrizSoapOut">
     <wsdl:part name="parameters" element="tns:InsertarUnidadesMatrizResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertarUnidadesMatrizDestruidoSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertarUnidadesMatrizDestruido" />
+  </wsdl:message>
+  <wsdl:message name="InsertarUnidadesMatrizDestruidoSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertarUnidadesMatrizDestruidoResponse" />
   </wsdl:message>
   <wsdl:message name="ConfigurarParametrosSoapIn">
     <wsdl:part name="parameters" element="tns:ConfigurarParametros" />
@@ -400,6 +510,30 @@
   </wsdl:message>
   <wsdl:message name="ObtenerTamYSoapOut">
     <wsdl:part name="parameters" element="tns:ObtenerTamYResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfigurarJugadoresSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfigurarJugadores" />
+  </wsdl:message>
+  <wsdl:message name="ConfigurarJugadoresSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfigurarJugadoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarUnidadesSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarUnidades" />
+  </wsdl:message>
+  <wsdl:message name="EliminarUnidadesSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarUnidadesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetReadySoapIn">
+    <wsdl:part name="parameters" element="tns:SetReady" />
+  </wsdl:message>
+  <wsdl:message name="SetReadySoapOut">
+    <wsdl:part name="parameters" element="tns:SetReadyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ComenzarJuegoSoapIn">
+    <wsdl:part name="parameters" element="tns:ComenzarJuego" />
+  </wsdl:message>
+  <wsdl:message name="ComenzarJuegoSoapOut">
+    <wsdl:part name="parameters" element="tns:ComenzarJuegoResponse" />
   </wsdl:message>
   <wsdl:portType name="ServiceSoap">
     <wsdl:operation name="LoginAdmin">
@@ -450,6 +584,14 @@
       <wsdl:input message="tns:ModificarSoapIn" />
       <wsdl:output message="tns:ModificarSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="EliminarListaJuegos">
+      <wsdl:input message="tns:EliminarListaJuegosSoapIn" />
+      <wsdl:output message="tns:EliminarListaJuegosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarListaJuegos">
+      <wsdl:input message="tns:ModificarListaJuegosSoapIn" />
+      <wsdl:output message="tns:ModificarListaJuegosSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="Top10Usuarios">
       <wsdl:input message="tns:Top10UsuariosSoapIn" />
       <wsdl:output message="tns:Top10UsuariosSoapOut" />
@@ -461,6 +603,10 @@
     <wsdl:operation name="InsertarUnidadesMatriz">
       <wsdl:input message="tns:InsertarUnidadesMatrizSoapIn" />
       <wsdl:output message="tns:InsertarUnidadesMatrizSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertarUnidadesMatrizDestruido">
+      <wsdl:input message="tns:InsertarUnidadesMatrizDestruidoSoapIn" />
+      <wsdl:output message="tns:InsertarUnidadesMatrizDestruidoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ConfigurarParametros">
       <wsdl:input message="tns:ConfigurarParametrosSoapIn" />
@@ -493,6 +639,22 @@
     <wsdl:operation name="ObtenerTamY">
       <wsdl:input message="tns:ObtenerTamYSoapIn" />
       <wsdl:output message="tns:ObtenerTamYSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfigurarJugadores">
+      <wsdl:input message="tns:ConfigurarJugadoresSoapIn" />
+      <wsdl:output message="tns:ConfigurarJugadoresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarUnidades">
+      <wsdl:input message="tns:EliminarUnidadesSoapIn" />
+      <wsdl:output message="tns:EliminarUnidadesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetReady">
+      <wsdl:input message="tns:SetReadySoapIn" />
+      <wsdl:output message="tns:SetReadySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ComenzarJuego">
+      <wsdl:input message="tns:ComenzarJuegoSoapIn" />
+      <wsdl:output message="tns:ComenzarJuegoSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
@@ -605,6 +767,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="EliminarListaJuegos">
+      <soap:operation soapAction="http://henry.cccc/EliminarListaJuegos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarListaJuegos">
+      <soap:operation soapAction="http://henry.cccc/ModificarListaJuegos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Top10Usuarios">
       <soap:operation soapAction="http://henry.cccc/Top10Usuarios" style="document" />
       <wsdl:input>
@@ -625,6 +805,15 @@
     </wsdl:operation>
     <wsdl:operation name="InsertarUnidadesMatriz">
       <soap:operation soapAction="http://henry.cccc/InsertarUnidadesMatriz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertarUnidadesMatrizDestruido">
+      <soap:operation soapAction="http://henry.cccc/InsertarUnidadesMatrizDestruido" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -697,6 +886,42 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerTamY">
       <soap:operation soapAction="http://henry.cccc/ObtenerTamY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfigurarJugadores">
+      <soap:operation soapAction="http://henry.cccc/ConfigurarJugadores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarUnidades">
+      <soap:operation soapAction="http://henry.cccc/EliminarUnidades" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetReady">
+      <soap:operation soapAction="http://henry.cccc/SetReady" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ComenzarJuego">
+      <soap:operation soapAction="http://henry.cccc/ComenzarJuego" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -815,6 +1040,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="EliminarListaJuegos">
+      <soap12:operation soapAction="http://henry.cccc/EliminarListaJuegos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarListaJuegos">
+      <soap12:operation soapAction="http://henry.cccc/ModificarListaJuegos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Top10Usuarios">
       <soap12:operation soapAction="http://henry.cccc/Top10Usuarios" style="document" />
       <wsdl:input>
@@ -835,6 +1078,15 @@
     </wsdl:operation>
     <wsdl:operation name="InsertarUnidadesMatriz">
       <soap12:operation soapAction="http://henry.cccc/InsertarUnidadesMatriz" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertarUnidadesMatrizDestruido">
+      <soap12:operation soapAction="http://henry.cccc/InsertarUnidadesMatrizDestruido" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -907,6 +1159,42 @@
     </wsdl:operation>
     <wsdl:operation name="ObtenerTamY">
       <soap12:operation soapAction="http://henry.cccc/ObtenerTamY" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfigurarJugadores">
+      <soap12:operation soapAction="http://henry.cccc/ConfigurarJugadores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarUnidades">
+      <soap12:operation soapAction="http://henry.cccc/EliminarUnidades" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetReady">
+      <soap12:operation soapAction="http://henry.cccc/SetReady" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ComenzarJuego">
+      <soap12:operation soapAction="http://henry.cccc/ComenzarJuego" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

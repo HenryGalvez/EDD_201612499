@@ -162,6 +162,8 @@
               <br />
               <asp:Label ID="labelAltura" runat="server" />
               <br />
+              <asp:Label ID="labelNivel" runat="server" />
+              <br />
               <asp:TextBox ID="labelTop10Usuarios" runat="server" Height="179px" ReadOnly="True" TextMode="MultiLine" Width="1050px"></asp:TextBox>
             
               <br />
@@ -177,7 +179,7 @@
         <!--mostrar Tablero Actual-->
         <div class="card mb-3" runat="server" id="Div3" >
         <div class="card-header">
-          <i class="fa fa-table"></i>Tablero Actual</div>
+          <i class="fa fa-table"></i>Tablero Sobrevivientes</div>
         <div class="card-body">
             
           <div class="table-responsive">
@@ -205,7 +207,7 @@
         <!--mostrar Tablero Destruidos-->
         <div class="card mb-3" runat="server" id="Div4" >
         <div class="card-header">
-          <i class="fa fa-table"></i>Tablero Actual</div>
+          <i class="fa fa-table"></i>Unidades Destruidas</div>
         <div class="card-body">
             
           <div class="table-responsive">

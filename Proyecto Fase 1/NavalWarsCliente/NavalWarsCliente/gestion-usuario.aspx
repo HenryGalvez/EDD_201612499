@@ -201,25 +201,6 @@
         
 
 
-        <!--mostrar usuarios-->
-        <div class="card mb-3" runat="server" id="mostrar" >
-        <div class="card-header">
-          <i class="fa fa-table"></i> Resultador de la Busqueda</div>
-        <div class="card-body">
-            
-          <div class="table-responsive">
-                
-            <asp:GridView runat="server" class="table table-bordered" ID="TableUsuarios"  AutoGenerateColumns="false">
-              <columns>
-                  <asp:BoundField HeaderText="Nick" />
-                  
-                  
-              </columns>
-            </asp:GridView>
-          </div>
-        </div>
-        <div class="card-footer small text-muted">Updated</div>
-      </div>
 
 
 
@@ -356,11 +337,11 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputPassword1">Unidades desplegadas</label>
-                <asp:TextBox ID="IUD" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
+                <asp:TextBox ID="IUD" runat="server" class="form-control" type="number" min="0" placeholder="" ></asp:TextBox>
               </div>
               <div class="col-md-6">
                 <label for="exampleInputPassword1">Unidades sobrevivientes</label>
-                  <asp:TextBox ID="IUS" runat="server" class="form-control" type="number" placeholder=""></asp:TextBox>
+                  <asp:TextBox ID="IUS" runat="server" class="form-control" type="number" min="0" placeholder=""></asp:TextBox>
               </div>
                 
             </div>
@@ -375,7 +356,7 @@
               </div>
               <div class="col-md-6">
                 <label for="exampleInputPassword1">gano</label>
-                  <asp:TextBox ID="IG" runat="server" class="form-control" type="number" placeholder=""></asp:TextBox>
+                  <asp:TextBox ID="IG" runat="server" class="form-control" type="number" min="0" max="1" placeholder=""></asp:TextBox>
               </div>
                 
             </div>
@@ -398,6 +379,103 @@
               </div>
                 
             </div>
+
+
+            
+          </div>
+          
+
+
+            </div>
+            <div class="card-footer small text-muted"></div>
+          </div>
+
+		 
+            
+
+		  
+		  
+        </div>
+        <div class="col-lg-4">
+          <!-- Example Pie Chart Card-->
+          
+           
+
+
+        </div>
+      </div>
+
+
+
+
+        <div class="row">
+        <div class="col-lg-8">
+          <!-- modificar usuario juego-->
+          
+            <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-wrench"></i>Modificar Juegos de Usuario</div>
+            <div class="card-body">
+
+
+                <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Usuario a modificar</label>
+                  <asp:TextBox ID="MLJUsuario" runat="server" class="form-control" type="text" placeholder="NickName Usuario" ></asp:TextBox>
+                
+              </div>
+              <div class="col-md-6">
+                <label for="exampleConfirmPassword">Id del elemento de la Lista</label>
+               <asp:TextBox ID="MLJId" runat="server" class="form-control" type="number" min="1" placeholder="Id" ></asp:TextBox>
+              </div>
+                
+            </div>
+            <asp:Button ID="EliminarLJ" runat="server" Text="Eliminar elemento" Width="100%" class="btn btn-primary btn-block" OnClick="BEjuegos_Click"  />
+             <div class="form-group">
+            <div class="form-row">
+             
+              <div class="col-md-6">
+                <label for="exampleInputLastName">NickName Oponente</label>
+                <asp:TextBox ID="MLJNickOponente" runat="server" class="form-control" type="text" placeholder="Ingrese el NickName del oponente" ></asp:TextBox>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Unidades desplegadas</label>
+                <asp:TextBox ID="MLJUdesplegadas" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Unidades sobrevivientes</label>
+                  <asp:TextBox ID="MLJUSobre" runat="server" class="form-control" type="number" placeholder=""></asp:TextBox>
+              </div>
+                
+            </div>
+
+            
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Unidades destruidas</label>
+                <asp:TextBox ID="MLJUdestru" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">gano</label>
+                  <asp:TextBox ID="MLJGano" runat="server" class="form-control" type="number" min="0" max="1" placeholder=""></asp:TextBox>
+              </div>
+                
+            </div>
+
+            
+          </div>
+          <asp:Button ID="ModificarLJ" runat="server" Text="Ingresar a la Lista de Juegos" Width="100%" class="btn btn-primary btn-block" OnClick="BMjuegos_Click"  />
+          <div class="form-group">
+            
+
+              
 
 
             

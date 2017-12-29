@@ -41,7 +41,8 @@ public partial class index : System.Web.UI.Page
                 string aux = servicio.MostrarDatosUsuario(nom);
                 if (aux != "")
                 {
-                    Response.Redirect("gestion-juegos.aspx");
+                    Session.Add("usuario", nom);
+                    Response.Redirect("cliente-juegos.aspx");
                 }
             }
 

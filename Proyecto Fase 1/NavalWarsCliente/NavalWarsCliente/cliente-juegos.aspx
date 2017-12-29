@@ -29,6 +29,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+       
+          
         
         
       </ul>
@@ -91,12 +93,11 @@
           <a href="#">Cuenta</a>
         </li>
         <li class="breadcrumb-item active">Configuraciones</li>
-          <li></li>
       </ol>
       
       <div class="row">
         <div class="col-lg-8">
-          <!-- Ingresar Unidad-->
+          <!-- Ingresar usuario-->
           
             <div class="card mb-3">
             <div class="card-header">
@@ -106,22 +107,38 @@
 
                 
          
+                <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Iniciar</label>
+                  <asp:Button ID="Iniciar" runat="server" Text="Iniciar Juego" Width="100%" class="btn btn-primary btn-block" OnClick="BIniciar_Click"  />
+                
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Iniciar</label>
+                  <asp:Button ID="Comenzar" runat="server" Text="Iniciar Partida" Width="100%" class="btn btn-primary btn-block" OnClick="BComenzar_Click"  />
+                
+              </div>
+            </div>
+          </div>
+
+
              <div class="form-group">
             <div class="form-row">
-              
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Columna</label>
+                <asp:TextBox ID="IColumna" runat="server" class="form-control" type="letter" placeholder="Solo Letras" ></asp:TextBox>
+              </div>
               <div class="col-md-6">
                 <label for="exampleInputLastName">Fila</label>
-                <asp:TextBox ID="IFila" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
+                <asp:TextBox ID="IFila" runat="server" class="form-control" type="number" min="0" placeholder="" ></asp:TextBox>
               </div>
             </div>
           </div>
           
           <div class="form-group">
             <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Columna</label>
-                <asp:TextBox ID="IColumna" runat="server" class="form-control" type="letter" placeholder="Solo Letras" ></asp:TextBox>
-              </div>
+              
               <div class="col-md-6">
                 <label for="exampleInputPassword1">Tipo</label>
                   <asp:DropDownList ID="IDLTipo" runat="server">
@@ -135,31 +152,18 @@
                   </asp:DropDownList>
                 
               </div>
+                <div class="col-md-6">
+                <label for="exampleInputPassword1">Ingresar</label>
+                  <asp:Button ID="BCrear" runat="server" Text="Ingresar Unidad" Width="100%" class="btn btn-primary btn-block" OnClick="BCrear_Click"  />
+                
+              </div>
                 
             </div>
 
             
           </div>
-          <asp:Button ID="BCrear" runat="server" Text="Crear Unidad" Width="100%" class="btn btn-primary btn-block" OnClick="BCrear_Click"  />
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Archivo CSV Unidades</label>
-                  <asp:FileUpload ID="FileUploadCSVUnidades" accept =".csv" runat="server" />
-                
-              </div>
-              <div class="col-md-6">
-                <label for="exampleConfirmPassword">Subir</label>
-               <asp:Button ID="BSubirUnidades" runat="server" Text="Cargar" Width="100%" class="btn btn-primary btn-block" OnClick="BSU_Click"  />
-              </div>
-                
-            </div>
-
-              
-
-
-            
-          </div>
+          
+          
           
 
 
@@ -190,33 +194,37 @@
         
 
 
-        <!--mostrar usuarios-->
+        <!--Eliminar-->
         <div class="card mb-3" runat="server" id="mostrar" >
         <div class="card-header">
-          <i class="fa fa-table"></i> Parametros Actuales</div>
+          <i class="fa fa-table"></i> Eliminar Unidad</div>
         <div class="card-body">
             
           <div class="table-responsive">
                 
             
-              <asp:Label ID="LabelNivel1" runat="server" Text=""></asp:Label>
-              <br />
-              <asp:Label ID="LabelNivel2" runat="server" Text=""></asp:Label>
-              <br />
-              <asp:Label ID="LabelNivel3" runat="server" Text=""></asp:Label>
-              <br />
-              <asp:Label ID="LabelNivel4" runat="server" Text=""></asp:Label>
-              <br />
-              <asp:Label ID="LabelTamx" runat="server" Text=""></asp:Label>
-              <br />
-              <asp:Label ID="LabelTamy" runat="server" Text=""></asp:Label>
-              <br />
-              <asp:Label ID="LabelTiempo" runat="server" Text=""></asp:Label>
-              <br />
-              <asp:Label ID="LabelNick1" runat="server" Text=""></asp:Label>
-              <br />
-              <asp:Label ID="LabelNick2" runat="server" Text=""></asp:Label>
-                
+              <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Columna</label>
+                <asp:TextBox ID="EUColumna" runat="server" class="form-control" type="letter" placeholder="Solo Letras" ></asp:TextBox>
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputLastName">Fila</label>
+                <asp:TextBox ID="EUFila" runat="server" class="form-control" type="number" min="0" placeholder="" ></asp:TextBox>
+              </div>
+            </div>
+          </div>
+                <asp:DropDownList ID="DLEliminar" runat="server">
+                      <asp:ListItem>Submarino</asp:ListItem>
+                      <asp:ListItem>Crucero</asp:ListItem>
+                      <asp:ListItem>Fragata</asp:ListItem>
+                      <asp:ListItem>Helicoptero</asp:ListItem>
+                      <asp:ListItem>Caza</asp:ListItem>
+                      <asp:ListItem>Bombardero</asp:ListItem>
+                      <asp:ListItem>Neosatelite</asp:ListItem>
+                  </asp:DropDownList>
+              <asp:Button ID="BtnEliminarU" runat="server" Text="Ingresar Unidad" Width="100%" class="btn btn-primary btn-block" OnClick="BEliminar_Click"  />
             
           </div>
         </div>
@@ -225,242 +233,53 @@
 
 
 
-
-         
-
-
-
-
-
-       
-
-
-
-         <!-- Modificar parametros-->
-      <div class="card mb-3">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" />
+        <div>
+            <asp:Timer ID="Timer1" OnTick="Timer1_Tick" runat="server" Interval="10000">
+            </asp:Timer>
+        </div>
+        
+                <div class="card mb-3" runat="server" id="Div3" >
         <div class="card-header">
-          <i class="fa fa-search"></i> Modificar Parametros</div>
+          <i class="fa fa-table"></i>Tablero Actual</div>
         <div class="card-body">
-           
             
-            
-            <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Unidades en el Nivel 1</label>
-                <asp:TextBox ID="IUN0" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
-              </div>
-                <div class="col-md-6">
-                <label for="exampleInputPassword1">Unidades en el Nivel 2</label>
-                <asp:TextBox ID="IUN1" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
-              </div>
-              
-                
-            </div>
+          <div class="table-responsive">
 
-            
-          </div>
+              <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server">
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick" />
+            </Triggers>
+            <ContentTemplate>
 
-                
-          
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Unidades en el Nivel 3</label>
-                <asp:TextBox ID="IUN2" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
-              </div>
-                <div class="col-md-6">
-                <label for="exampleInputPassword1">Unidaes en el Nivel 4</label>
-                <asp:TextBox ID="IUN3" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
-              </div>
-              
-                
-            </div>
+              <label for="exampleInputPassword1">Tablero en nivel 1</label>
+              <br />
+              <asp:Image ID="TAN1" runat="server" width="1000" />
+              <br />
+              <label for="exampleInputPassword1">Tablero en nivel 2</label>
+              <br />
+              <asp:Image ID="TAN2" runat="server" width="1000" />
+              <br />
+              <label for="exampleInputPassword1">Tablero en nivel 3</label>
+              <br />
+              <asp:Image ID="TAN3" runat="server" width="1000" />
+              <br />
+              <label for="exampleInputPassword1">Tablero en nivel 4</label>
+              <br />
+              <asp:Image ID="TAN4" runat="server" width="1000" />
 
+                </ContentTemplate>
+        </asp:UpdatePanel>
             
           </div>
-
-            <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Cantidad de Filas</label>
-                <asp:TextBox ID="ICF" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
-              </div>
-                <div class="col-md-6">
-                <label for="exampleInputPassword1">Cantidad de Columnas</label>
-                <asp:TextBox ID="ICC" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
-              </div>
-              
-                
-            </div>
-
-            
-          </div>
-            <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">NickName 1</label>
-                <asp:TextBox ID="INN1" runat="server" class="form-control" type="text" placeholder="" ></asp:TextBox>
-              </div>
-                <div class="col-md-6">
-                <label for="exampleInputPassword1">NickName 2</label>
-                <asp:TextBox ID="INN2" runat="server" class="form-control" type="text" placeholder="" ></asp:TextBox>
-              </div>
-              
-                
-            </div>
-
-            
-          </div>
-            
-            <div class="form-group">
-            
-
-              <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Archivo CSV Juegos</label>
-                  <asp:FileUpload ID="FileUploadParametros" accept=".csv" runat="server" />
-                
-              </div>
-              <div class="col-md-6">
-                <label for="exampleConfirmPassword">Subir</label>
-               <asp:Button ID="CParametros" runat="server" Text="Cargar" Width="100%" class="btn btn-primary btn-block" OnClick="BSP_Click"  />
-              </div>
-                
-            </div>
-
-
-            
-          </div>
-
-            <div class="form-group">
-            <div class="form-row">
-              
-                <div class="col-md-6">
-                <label for="exampleInputPassword1">Tiempo de cada Juego (minutos)</label>
-                <asp:TextBox ID="ITJ" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
-              </div>
-              
-                
-            </div>
-
-            
-          </div>
-
-          <asp:Button ID="modificar" runat="server" Text="Modificar Parametros" Width="100%" class="btn btn-primary btn-block" OnClick="BModificarP_Click"  />
-          
-
-
-
-          
-        
-        
         </div>
-        <div class="card-footer small text-muted"></div>
+        <div class="card-footer small text-muted">Updated</div>
       </div>
-
-
-
-
-        <div class="row">
-        <div class="col-lg-8">
-          <!-- Ingresar usuario juego-->
-          
-            <div class="card mb-3">
-            <div class="card-header">
-              <i class="fa fa-wrench"></i> Insertar Juegos de Usuario</div>
-            <div class="card-body">
-
-
-                
+            
          
-             <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputName">NickName</label>
-                <asp:TextBox ID="INickBase" runat="server" class="form-control" type="text" placeholder="NickName Usuario" ></asp:TextBox>
-              </div>
-              <div class="col-md-6">
-                <label for="exampleInputLastName">NickName Oponente</label><asp:Label ID="Label2" runat="server" class="text-danger" Font-Size="Small"></asp:Label>
-                <asp:TextBox ID="INickOponente" runat="server" class="form-control" type="text" placeholder="Ingrese el NickName del oponente" ></asp:TextBox>
-              </div>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Unidades desplegadas</label>
-                <asp:TextBox ID="IUD" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
-              </div>
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Unidades sobrevivientes</label>
-                  <asp:TextBox ID="IUS" runat="server" class="form-control" type="number" placeholder=""></asp:TextBox>
-              </div>
-                
-            </div>
-
-            
-          </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Unidades destruidas</label>
-                <asp:TextBox ID="IUDes" runat="server" class="form-control" type="number" placeholder="" ></asp:TextBox>
-              </div>
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">gano</label>
-                  <asp:TextBox ID="IG" runat="server" class="form-control" type="number" placeholder=""></asp:TextBox>
-              </div>
-                
-            </div>
-
-            
-          </div>
-          <asp:Button ID="IJuegos" runat="server" Text="Ingresar a la Lista de Juegos" Width="100%" class="btn btn-primary btn-block" OnClick="BIjuegos_Click"  />
-          <div class="form-group">
-            
-
-              <div class="form-row">
-              <div class="col-md-6">
-                <label for="exampleInputPassword1">Archivo CSV Juegos</label>
-                  <asp:FileUpload ID="FileUploadCSVJuegos" accept=".csv" runat="server" />
-                
-              </div>
-              <div class="col-md-6">
-                <label for="exampleConfirmPassword">Subir</label>
-               <asp:Button ID="BSubirJuegos" runat="server" Text="Cargar" Width="100%" class="btn btn-primary btn-block" OnClick="BSJ_Click"  />
-              </div>
-                
-            </div>
 
 
-            
-          </div>
-          
 
-
-            </div>
-            <div class="card-footer small text-muted"></div>
-          </div>
-
-		 
-            
-
-		  
-		  
-        </div>
-        <div class="col-lg-4">
-          <!-- Example Pie Chart Card-->
-          
-           
-
-
-        </div>
-      </div>
-
-
-       
 
 
 

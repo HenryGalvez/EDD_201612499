@@ -18,26 +18,21 @@ public class Service : System.Web.Services.WebService
     
 
     static ArbolBinario arbol = new ArbolBinario();
-    /*static Matriz matrizNivel0 = new Matriz();
-    static Matriz matrizNivel1 = new Matriz();
-    static Matriz matrizNivel2 = new Matriz();
-    static Matriz matrizNivel3 = new Matriz();
-
-
-
-    static Matriz matrizNivel0Destruidas = new Matriz();
-    static Matriz matrizNivel1Destruidas = new Matriz();
-    static Matriz matrizNivel2Destruidas = new Matriz();
-    static Matriz matrizNivel3Destruidas = new Matriz();*/
+    
     static Matriz matriz = new Matriz();
+    static Matriz matrizDestruido = new Matriz();
     string nick = "Admin",pass = "admin";
-    static int Univel0 = 0;
-    static int Univel1 = 0;
-    static int Univel2 = 0;
-    static int Univel3 = 0;
+    static int Univel0 = 10;
+    static int Univel1 = 10;
+    static int Univel2 = 10;
+    static int Univel3 = 10;
     static int TamX = 25;
     static int TamY = 25;
-    static int Tiempo = 0;
+    static int Tiempo = 15;
+    static string primerJugador = "";
+    static string segundoJugador = "";
+    static Boolean primerReady = false;
+    static Boolean segundoReady = false;
 
     [WebMethod]
     public Boolean LoginAdmin(string nick_, string pass_)
@@ -98,14 +93,19 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public void MostrarTableros()
+    public void MostrarTableros(string opcion)
     {
         
-        matriz.GenerarGrafo(matriz.primero.atras.filas, TamX, TamY, "matrizNivel0");
-        matriz.GenerarGrafo(matriz.primero.filas, TamX, TamY, "matrizNivel1");
-        matriz.GenerarGrafo(matriz.primero.adelante.filas, TamX, TamY, "matrizNivel2");
-        matriz.GenerarGrafo(matriz.primero.adelante.adelante.filas, TamX, TamY, "matrizNivel3");
-        
+        matriz.GenerarGrafo(matriz.primero.atras.filas, TamX, TamY, "matrizNivel0" + opcion,opcion);
+        matriz.GenerarGrafo(matriz.primero.filas, TamX, TamY, "matrizNivel1" + opcion, opcion);
+        matriz.GenerarGrafo(matriz.primero.adelante.filas, TamX, TamY, "matrizNivel2" + opcion, opcion);
+        matriz.GenerarGrafo(matriz.primero.adelante.adelante.filas, TamX, TamY, "matrizNivel3" + opcion, opcion);
+
+        matrizDestruido.GenerarGrafo(matrizDestruido.primero.atras.filas, TamX, TamY, "matrizNivel0Destruido" + opcion, opcion);
+        matrizDestruido.GenerarGrafo(matrizDestruido.primero.filas, TamX, TamY, "matrizNivel1Destruido" + opcion, opcion);
+        matrizDestruido.GenerarGrafo(matrizDestruido.primero.adelante.filas, TamX, TamY, "matrizNivel2Destruido" + opcion, opcion);
+        matrizDestruido.GenerarGrafo(matrizDestruido.primero.adelante.adelante.filas, TamX, TamY, "matrizNivel3Destruido" + opcion, opcion);
+
 
     }
 
@@ -135,6 +135,58 @@ public class Service : System.Web.Services.WebService
         arbol.Modificar(antes, nick, pass, correo, estado);
     }
 
+    [WebMethod]
+    public void EliminarListaJuegos(string usuario, int id)
+    {
+        Nodo ap = arbol.ExisteNick(arbol.primero, usuario);
+        
+        if (ap != null)
+        {
+            ap.juegos.Eliminar(id);
+        }
+        
+    }
+
+    [WebMethod]
+    public void ModificarListaJuegos(string usuario, int id, string nickOponente, int desplegadas, int sobrevivientes, int destruidas, Byte gano_) 
+    {
+        Nodo ap = arbol.ExisteNick(arbol.primero, usuario);
+        NodoJuegos mod;
+        if (ap != null)
+        {
+            mod = ap.juegos.Buscar(id);
+        }
+        else
+        {
+            mod = null;
+        }
+
+        if (mod != null)
+        {
+            if (nickOponente != "")
+            {
+                mod.NickOponente = nickOponente;
+            }
+            if (desplegadas >= 0)
+            {
+                mod.UDesplegadas = desplegadas;
+            }
+            if (sobrevivientes >= 0)
+            {
+                mod.USobrevivientes = sobrevivientes;
+            }
+            if (destruidas >= 0)
+            {
+                mod.UDestruidas = destruidas;
+            }
+
+            if (gano_ >= 0)
+            {
+                mod.Gano = gano_;
+            }
+        }
+    }
+
 
     [WebMethod]
     public string Top10Usuarios()
@@ -150,82 +202,128 @@ public class Service : System.Web.Services.WebService
     }
 
 
-    /*[WebMethod]
-    public void InsertarUnidadesNivel0(string jugador,string tipo,string fila,string columna,Byte estado,int nivel)
-    {
-        
-        matrizNivel0.Insertar(matrizNivel0.primero,tipo, jugador, fila, columna, estado);
-        
-    }
-
-    [WebMethod]
-    public int InsertarUnidadesNivel1(string jugador, string tipo, string fila, string columna, Byte estado, int nivel)
-    {
-        
-        matrizNivel1.Insertar(matrizNivel1.primero, tipo, jugador, fila, columna, estado);
-        return matrizNivel1.count;
-    }
-    [WebMethod]
-    public void InsertarUnidadesNivel2(string jugador, string tipo, string fila, string columna, Byte estado, int nivel)
-    {
-        
-        matrizNivel2.Insertar(matrizNivel2.primero, tipo, jugador, fila, columna, estado);
-        
-    }
-    [WebMethod]
-    public void InsertarUnidadesNivel3(string jugador, string tipo, string fila, string columna, Byte estado, int nivel)
-    {
-        
-        matrizNivel3.Insertar(matrizNivel3.primero, tipo, jugador, fila, columna, estado);
-
-    }
-    [WebMethod]
-    public void InsertarUnidadesNivel0Destruidas(string jugador, string tipo, string fila, string columna, Byte estado, int nivel)
-    {
-        
-         matrizNivel0Destruidas.Insertar(matrizNivel0Destruidas.primero, tipo, jugador, fila, columna, estado);
-       
-    }
-    [WebMethod]
-    public void InsertarUnidadesNivel1Destruidas(string jugador, string tipo, string fila, string columna, Byte estado, int nivel)
-    {
-        
-         matrizNivel1Destruidas.Insertar(matrizNivel1Destruidas.primero, tipo, jugador, fila, columna, estado);
-         
-    }
-    [WebMethod]
-    public void InsertarUnidadesNivel2Destruidas(string jugador, string tipo, string fila, string columna, Byte estado, int nivel)
-    {
-        
-        matrizNivel2Destruidas.Insertar(matrizNivel2Destruidas.primero, tipo, jugador, fila, columna, estado);
-        
-    }
-    [WebMethod]
-    public void InsertarUnidadesNivel3Destruidas(string jugador, string tipo, string fila, string columna, Byte estado, int nivel)
-    {
-        matrizNivel3Destruidas.Insertar(matrizNivel3Destruidas.primero, tipo, jugador, fila, columna, estado);
-       
-    }*/
+    
 
     [WebMethod]
     public void InsertarUnidadesMatriz(string jugador, string tipo, string fila, string columna, Byte estado, int nivel)
     {
         if (nivel == 0)
         {
-            matriz.Insertar(matriz.primero.atras, tipo, jugador, fila, columna, estado);
+            if (matriz.submarino <= Univel0)
+            {
+                matriz.Insertar(matriz.primero.atras, tipo, jugador, fila, columna, estado);
+                matriz.submarino = matriz.submarino + 1;
+            }
+            
         }
         else if (nivel == 1)
         {
-            matriz.Insertar(matriz.primero, tipo, jugador, fila, columna, estado);
+            if ((matriz.fragata + matriz.crucero) <= Univel1)
+            {
+                matriz.Insertar(matriz.primero, tipo, jugador, fila, columna, estado);
+                if (tipo.Contains("Fragata"))
+                {
+                    matriz.fragata = matriz.fragata + 1;
+                }
+                else if (tipo.Contains("Crucero"))
+                {
+                    matriz.crucero = matriz.crucero + 1;
+                }
+            }
+            
         }
         else if (nivel == 2)
         {
-            matriz.Insertar(matriz.primero.adelante, tipo, jugador, fila, columna, estado);
+            if ((matriz.bombardero + matriz.caza + matriz.helicoptero) <= Univel2)
+            {
+                matriz.Insertar(matriz.primero.adelante, tipo, jugador, fila, columna, estado);
+                if (tipo.Contains("Bombardero"))
+                {
+                    matriz.bombardero = matriz.bombardero + 1;
+                }
+                else if (tipo.Contains("Caza"))
+                {
+                    matriz.caza = matriz.caza + 1;
+                }
+                else if (tipo.Contains("Helicoptero"))
+                {
+                    matriz.helicoptero = matriz.helicoptero + 1;
+                }
+            }
+            
         }
         else if (nivel == 3)
         {
-            Pivote ae= matriz.primero.adelante;
-            matriz.Insertar(ae.adelante, tipo, jugador, fila, columna, estado);
+            if (matriz.neosatelite <= Univel3)
+            {
+                Pivote ae = matriz.primero.adelante;
+                matriz.Insertar(ae.adelante, tipo, jugador, fila, columna, estado);
+                matriz.neosatelite = matriz.neosatelite + 1;
+            }
+            
+        }
+
+
+    }
+
+
+    [WebMethod]
+    public void InsertarUnidadesMatrizDestruido(string jugador, string tipo, string fila, string columna, Byte estado, int nivel)
+    {
+        if (nivel == 0)
+        {
+            if (matrizDestruido.submarino <= Univel0)
+            {
+                matrizDestruido.Insertar(matrizDestruido.primero.atras, tipo, jugador, fila, columna, estado);
+                matrizDestruido.submarino = matrizDestruido.submarino + 1;
+            }
+
+        }
+        else if (nivel == 1)
+        {
+            if ((matrizDestruido.fragata + matrizDestruido.crucero) <= Univel1)
+            {
+                matrizDestruido.Insertar(matrizDestruido.primero, tipo, jugador, fila, columna, estado);
+                if (tipo.Contains("Fragata"))
+                {
+                    matrizDestruido.fragata = matrizDestruido.fragata + 1;
+                }
+                else if (tipo.Contains("Crucero"))
+                {
+                    matrizDestruido.crucero = matrizDestruido.crucero + 1;
+                }
+            }
+
+        }
+        else if (nivel == 2)
+        {
+            if ((matrizDestruido.bombardero + matrizDestruido.caza + matrizDestruido.helicoptero) <= Univel2)
+            {
+                matrizDestruido.Insertar(matrizDestruido.primero.adelante, tipo, jugador, fila, columna, estado);
+                if (tipo.Contains("Bombardero"))
+                {
+                    matrizDestruido.bombardero = matrizDestruido.bombardero + 1;
+                }
+                else if (tipo.Contains("Caza"))
+                {
+                    matrizDestruido.caza = matrizDestruido.caza + 1;
+                }
+                else if (tipo.Contains("Helicoptero"))
+                {
+                    matrizDestruido.helicoptero = matrizDestruido.helicoptero + 1;
+                }
+            }
+
+        }
+        else if (nivel == 3)
+        {
+            if (matrizDestruido.neosatelite <= Univel3)
+            {
+                Pivote ae = matrizDestruido.primero.adelante;
+                matrizDestruido.Insertar(ae.adelante, tipo, jugador, fila, columna, estado);
+                matrizDestruido.neosatelite = matrizDestruido.neosatelite + 1;
+            }
+
         }
 
 
@@ -314,5 +412,81 @@ public class Service : System.Web.Services.WebService
         return retorno;
     }
 
+
+    [WebMethod]
+    public int ConfigurarJugadores(string usuario)
+    {
+        if (primerJugador.Equals(""))
+        {
+            primerJugador = usuario;
+            return 1;
+        }
+        else if (segundoJugador.Equals(""))
+        {
+            segundoJugador = usuario;
+            return 2;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+    [WebMethod]
+    public void EliminarUnidades(string fila,string columna,int nivel)
+    {
+        if (nivel == 0)
+        {
+            matriz.Eliminar(matriz.primero.atras, fila, columna);
+        }
+        else if (nivel == 1)
+        {
+            matriz.Eliminar(matriz.primero, fila, columna);
+        }
+        else if (nivel == 2)
+        {
+            matriz.Eliminar(matriz.primero.adelante, fila, columna);
+        }
+        else if (nivel == 3)
+        {
+            matriz.Eliminar(matriz.primero.adelante.adelante, fila, columna);
+        }
+
+    }
+
+    [WebMethod]
+    public void SetReady(string usuario)
+    {
+        if (usuario.Equals(primerJugador))
+        {
+            primerReady = true;
+        }
+        else if (usuario.Equals(segundoJugador))
+        {
+            segundoReady = true;
+        }
+    }
+
+
+    [WebMethod]
+    public Boolean ComenzarJuego()
+    {
+        if (primerReady == true && segundoReady == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+
+    [WebMethod]
+    public void VaciarMatrices()
+    {
+        matriz.Vaciar();
+        matrizDestruido.Vaciar();
+    }
 
 }

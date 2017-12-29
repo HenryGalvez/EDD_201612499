@@ -21,24 +21,24 @@ public partial class reportes : System.Web.UI.Page
             ArbolBinarioEspejo();
             ArbolBinarioNormal();
 
-            a.MostrarTableros();
-
-            labelHojas.Text = "Numero de Hojas:   " + a.NodosHojas();
-            labelRamas.Text = "Numero de Nodos Ramas:   " + a.NodosRama();
-            labelAltura.Text ="La Altura es:   " + a.Altura();
-            labelTop10Usuarios.Text = "Top 10 Usuarios Con Mas Juegos Ganados"+Environment.NewLine+ a.Top10Usuarios();
-            labelTop10Porcentaje.Text = "Top 10 con Mayor Porcentaje de Unidades Destruidas"+Environment.NewLine+ a.Top10Porcentaje();
             
 
+            labelHojas.Text = "Numero de Hojas:   " + a.NodosHojas();
             TAN1.ImageUrl = Matriz("matrizNivel0");
+            labelRamas.Text = "Numero de Nodos Ramas:   " + a.NodosRama();
             TAN2.ImageUrl = Matriz("matrizNivel1");
+            labelAltura.Text ="La Altura es:   " + a.Altura();
+            labelNivel.Text = "Niveles Totales:   " + (a.Altura()-1);
             TAN3.ImageUrl = Matriz("matrizNivel2");
+            labelTop10Usuarios.Text = "Top 10 Usuarios Con Mas Juegos Ganados"+Environment.NewLine+ a.Top10Usuarios();
+            labelTop10Porcentaje.Text = "Top 10 con Mayor Porcentaje de Unidades Destruidas"+Environment.NewLine+ a.Top10Porcentaje();
             TAN4.ImageUrl = Matriz("matrizNivel3");
 
-            TDN1.ImageUrl = Matriz("matrizNivel0Destruidas");
-            TDN2.ImageUrl = Matriz("matrizNivel1Destruidas");
-            TDN3.ImageUrl = Matriz("matrizNivel2Destruidas");
-            TDN4.ImageUrl = Matriz("matrizNivel3Destruidas");
+            TDN1.ImageUrl = Matriz("matrizNivel0Destruido");
+            TDN2.ImageUrl = Matriz("matrizNivel1Destruido");
+            TDN3.ImageUrl = Matriz("matrizNivel2Destruido");
+            TDN4.ImageUrl = Matriz("matrizNivel3Destruido");
+
 
         }
     }
@@ -60,9 +60,14 @@ public partial class reportes : System.Web.UI.Page
 
     public string Matriz(string nombre)
     {
-        Byte[] ims = System.IO.File.ReadAllBytes(@"C:\EDD\"+nombre+".jpg");
-        string imgbase = "data:image/jpg;base64," + Convert.ToBase64String(ims);
-        return imgbase;
+        
+        {
+            Byte[] ims = System.IO.File.ReadAllBytes(@"C:\EDD\" + nombre + ".jpg");
+            string imgbase = "data:image/jpg;base64," + Convert.ToBase64String(ims);
+            return imgbase;
+        }
+        
+        
 
     }
 

@@ -56,8 +56,18 @@ class ArbolBinario
         
         s = "NickName\t\tContraseña\t\tJuegos Ganados\t\tCorreo" + Environment.NewLine;
         EnOrden(primero);
+        string retorno = "";
+        string line = "";
+        int count=0;
+        StringReader f = new StringReader(s);
+        while ((line = f.ReadLine()) != null && count <12)
+        {
+            retorno += line;
+            retorno += Environment.NewLine;
+            count++;
+        }
         
-        return s;
+        return retorno;
     }
     public void EnOrden(Nodo guia)
     {
@@ -83,20 +93,32 @@ class ArbolBinario
         s = "NickName\t\tContraseña\t\tPorcentaje Destruidos\t\tCorreo" + Environment.NewLine;
         EnOrdenInverso(primero);
 
-        return s;
+        string retorno = "";
+        string line = "";
+        int count = 0;
+        StringReader f = new StringReader(s);
+        while ((line = f.ReadLine()) != null && count < 12)
+        {
+            retorno += line;
+            retorno += Environment.NewLine;
+            count++;
+        }
+
+        return retorno;
+        
     }
     public void EnOrdenInverso(Nodo guia)
     {
 
         if (guia != null)
         {
-
+            guia.juegos.CalcularPorcentajeUnidades();
             EnOrdenInverso(guia.derecho);
-            guia.juegos.CalcularPorcentajeUnidades(guia.juegos);
+            
             if (guia.juegos.porcentaje != 0)
             {
                 
-                s += guia.Nickname + "\t\t" + guia.Contraseña + "\t\t" + guia.juegos.porcentaje + "%\t\t" + guia.Correo + Environment.NewLine;
+                s += guia.Nickname + "\t\t" + guia.Contraseña + "\t\t" + guia.juegos.porcentaje + "% \t\t" + guia.Correo + Environment.NewLine;
                 
                 
             }
@@ -515,7 +537,8 @@ class ArbolBinario
             {
                 if (aux.anterior != null)
                 {
-                    txt += "node[shape = record label = " + '"' + "Oponente: " + aux.NickOponente;
+                    txt += "node[shape = record label = " + '"' + "Id: " + aux.id;
+                    txt += "\\" + "l" + "Oponente: " + aux.NickOponente;
                     txt += "\\" + "l" + "U Desplegadas: " + aux.UDesplegadas;
                     txt += "\\" + "l" + "U Sobrevivientes: " + aux.USobrevivientes;
                     txt += "\\" + "l" + "U Destruidas: " + aux.UDestruidas;
@@ -533,7 +556,8 @@ class ArbolBinario
                 }
                 else
                 {
-                    txt += "node[shape = record label = " + '"' + "Oponente: " + aux.NickOponente;
+                    txt += "node[shape = record label = " + '"' + "Id: " + aux.id;
+                    txt += "\\" + "l" + "Oponente: " + aux.NickOponente;
                     txt += "\\" + "l" + "U Desplegadas: " + aux.UDesplegadas;
                     txt += "\\" + "l" + "U Sobrevivientes: " + aux.USobrevivientes;
                     txt += "\\" + "l" + "U Destruidas: " + aux.UDestruidas;
@@ -602,7 +626,8 @@ class ArbolBinario
             {
                 if (aux.anterior != null)
                 {
-                    txt += "node[shape = record label = " + '"' + "Oponente: " + aux.NickOponente;
+                    txt += "node[shape = record label = " + '"' + "Id: " + aux.id;
+                    txt += "\\" + "l" + "Oponente: " + aux.NickOponente;
                     txt += "\\" + "l" + "U Desplegadas: " + aux.UDesplegadas;
                     txt += "\\" + "l" + "U Sobrevivientes: " + aux.USobrevivientes;
                     txt += "\\" + "l" + "U Destruidas: " + aux.UDestruidas;
@@ -620,7 +645,8 @@ class ArbolBinario
                 }
                 else
                 {
-                    txt += "node[shape = record label = " + '"' + "Oponente: " + aux.NickOponente;
+                    txt += "node[shape = record label = " + '"' + "Id: " + aux.id;
+                    txt += "\\" + "l" + "Oponente: " + aux.NickOponente;
                     txt += "\\" + "l" + "U Desplegadas: " + aux.UDesplegadas;
                     txt += "\\" + "l" + "U Sobrevivientes: " + aux.USobrevivientes;
                     txt += "\\" + "l" + "U Destruidas: " + aux.UDestruidas;
