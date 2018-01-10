@@ -18,7 +18,7 @@ public class Service : System.Web.Services.WebService
 
 
     static ArbolBinario arbol = new ArbolBinario();
-
+    static ArbolB arbolb = new ArbolB(4);
     static Matriz matriz = new Matriz();
     static Matriz matrizDestruido = new Matriz();
 
@@ -44,6 +44,9 @@ public class Service : System.Web.Services.WebService
     static int turno = 1;
     static Boolean p1 = true;
     static Boolean p2 = false;
+    static int ataque = 0;
+
+    static int win = 0;
     
 
     [WebMethod]
@@ -83,11 +86,32 @@ public class Service : System.Web.Services.WebService
         }
     }
 
+
     
+
+    [WebMethod]
+    public int getAtaque()
+    {
+        return ataque;
+    }
+
+
     [WebMethod]
     public void setMsjFinal(string ac_)
     {
         msjFinal = ac_;
+    }
+
+    [WebMethod]
+    public int getWin()
+    {
+        return win;
+    }
+
+    [WebMethod]
+    public void setWin(int win_)
+    {
+        win = win_;
     }
 
     [WebMethod]
@@ -156,9 +180,9 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public void AgregarJuego(string nickBase, string nickOponente, int desplegadas, int sobrevivientes, int destruidas, Byte gano_)
+    public void AgregarJuego(string nickBase, string nickOponente, int desplegadas, int sobrevivientes, int destruidas, Byte gano_,int ataque)
     {
-        arbol.InsertarJuego(arbol.primero, nickBase, nickOponente, desplegadas, sobrevivientes, destruidas, gano_);
+        arbol.InsertarJuego(arbol.primero, nickBase, nickOponente, desplegadas, sobrevivientes, destruidas, gano_,ataque);
     }
 
     [WebMethod]
@@ -325,29 +349,72 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public string Top10UnidadesDestruidas()
+    {
+        return arbol.MostrarTop10UDestruidas();
+    }
+
+    [WebMethod]
+    public string JuegoMayor()
+    {
+        return arbol.JuegoMayor();
+    }
+
+    [WebMethod]
+    public string JuegoMenor()
+    {
+        return arbol.JuegoMenor();
+    }
+
+    [WebMethod]
+    public string Receptor(int p)
+    {
+        if (p == 1)
+        {
+            return segundoJugador;
+        }
+        else
+        {
+            return primerJugador;
+        }
+    }
+
+    [WebMethod]
+    public string unidadAtacada()
+    {
+        return matriz.nombreD;
+    }
+
+    [WebMethod]
     public int Atacar(int nivel, string unidad, string fila, string columna, int nivelA)
     {
         if (nivel == 0)
         {
             if (nivelA == 0)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero.atras, unidad, fila, columna, matriz.primero.atras);
             }
             else if (nivelA == 1)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero.atras, unidad, fila, columna, matriz.primero);
             }
             else if (nivelA == 2)
             {
+                ++ataque;
+
                 return matriz.Atacar(matriz.primero.atras, unidad, fila, columna, matriz.primero.adelante);
             }
             else if (nivelA == 3)
             {
+                ++ataque;
+
                 return matriz.Atacar(matriz.primero.atras, unidad, fila, columna, matriz.primero.adelante.adelante);
             }
             else
             {
-                return -1;
+               return -1;
             }
 
         }
@@ -355,18 +422,23 @@ public class Service : System.Web.Services.WebService
         {
             if (nivelA == 0)
             {
+                ++ataque;
+
                 return matriz.Atacar(matriz.primero, unidad, fila, columna, matriz.primero.atras);
             }
             else if (nivelA == 1)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero, unidad, fila, columna, matriz.primero);
             }
             else if (nivelA == 2)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero, unidad, fila, columna, matriz.primero.adelante);
             }
             else if (nivelA == 3)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero, unidad, fila, columna, matriz.primero.adelante.adelante);
             }
             else
@@ -378,18 +450,22 @@ public class Service : System.Web.Services.WebService
         {
             if (nivelA == 0)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero.adelante, unidad, fila, columna, matriz.primero.atras);
             }
             else if (nivelA == 1)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero.adelante, unidad, fila, columna, matriz.primero);
             }
             else if (nivelA == 2)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero.adelante, unidad, fila, columna, matriz.primero.adelante);
             }
             else if (nivelA == 3)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero.adelante, unidad, fila, columna, matriz.primero.adelante.adelante);
             }
             else
@@ -401,18 +477,22 @@ public class Service : System.Web.Services.WebService
         {
             if (nivelA == 0)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero.adelante.adelante, unidad, fila, columna, matriz.primero.atras);
             }
             else if (nivelA == 1)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero.adelante.adelante, unidad, fila, columna, matriz.primero);
             }
             else if (nivelA == 2)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero.adelante.adelante, unidad, fila, columna, matriz.primero.adelante);
             }
             else if (nivelA == 3)
             {
+                ++ataque;
                 return matriz.Atacar(matriz.primero.adelante.adelante, unidad, fila, columna, matriz.primero.adelante.adelante);
             }
             else
@@ -477,11 +557,13 @@ public class Service : System.Web.Services.WebService
         if (a == 2)
         {
             finalizar = true;
+            win = 2;
             msjFinal = "El jugador " + segundoJugador + " ha GANADO LA PARTIDA" + Environment.NewLine + "PARTIDA FINALIZADA";
         }
         else if (a == 1)
         {
             finalizar = true;
+            win = 1;
             msjFinal = "El jugador " + primerJugador + " ha GANADO LA PARTIDA" + Environment.NewLine + "PARTIDA FINALIZADA";
         }
         else
@@ -497,11 +579,13 @@ public class Service : System.Web.Services.WebService
         if (a == 2)
         {
             finalizar = true;
+            win = 2;
             msjFinal = "El jugador " + segundoJugador + " ha GANADO LA PARTIDA" + Environment.NewLine + "PARTIDA FINALIZADA";
         }
         else if (a == 1)
         {
             finalizar = true;
+            win = 1;
             msjFinal = "El jugador " + primerJugador + " ha GANADO LA PARTIDA" + Environment.NewLine + "PARTIDA FINALIZADA";
         }
         else if (a == 0)
@@ -1005,5 +1089,19 @@ public class Service : System.Web.Services.WebService
             aux.contactos.GenerarGrafo();
         }
     }
+
+    [WebMethod]
+    public void InsertarArbolB(int ataque_, string fila_, string columna_, string uniA, int res, string unAt, string emi, string recep, string fecha_, string tie)
+    {
+        arbolb.Insertar(ataque_, fila_, columna_, uniA, res, unAt, emi, recep, fecha_, tie);
+    }
+
+    [WebMethod]
+    public void MostrarArbolB()
+    {
+        arbolb.GenerarGrafo();
+    }
+
+    
 
 }

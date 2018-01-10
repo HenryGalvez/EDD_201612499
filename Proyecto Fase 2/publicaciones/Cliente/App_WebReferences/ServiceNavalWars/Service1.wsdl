@@ -32,6 +32,16 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="getAtaque">
+        <s:complexType />
+      </s:element>
+      <s:element name="getAtaqueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="getAtaqueResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="setMsjFinal">
         <s:complexType>
           <s:sequence>
@@ -40,6 +50,26 @@
         </s:complexType>
       </s:element>
       <s:element name="setMsjFinalResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="getWin">
+        <s:complexType />
+      </s:element>
+      <s:element name="getWinResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="getWinResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="setWin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="win_" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="setWinResponse">
         <s:complexType />
       </s:element>
       <s:element name="getMsjFinal">
@@ -164,6 +194,7 @@
             <s:element minOccurs="1" maxOccurs="1" name="sobrevivientes" type="s:int" />
             <s:element minOccurs="1" maxOccurs="1" name="destruidas" type="s:int" />
             <s:element minOccurs="1" maxOccurs="1" name="gano_" type="s:unsignedByte" />
+            <s:element minOccurs="1" maxOccurs="1" name="ataque" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -322,6 +353,60 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="Top10PorcentajeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top10UnidadesDestruidas">
+        <s:complexType />
+      </s:element>
+      <s:element name="Top10UnidadesDestruidasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Top10UnidadesDestruidasResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JuegoMayor">
+        <s:complexType />
+      </s:element>
+      <s:element name="JuegoMayorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JuegoMayorResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JuegoMenor">
+        <s:complexType />
+      </s:element>
+      <s:element name="JuegoMenorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JuegoMenorResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Receptor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="p" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReceptorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReceptorResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="unidadAtacada">
+        <s:complexType />
+      </s:element>
+      <s:element name="unidadAtacadaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="unidadAtacadaResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -698,6 +783,31 @@
       <s:element name="MostrarAvlResponse">
         <s:complexType />
       </s:element>
+      <s:element name="InsertarArbolB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ataque_" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="fila_" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="columna_" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="uniA" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="res" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="unAt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="emi" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="recep" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fecha_" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tie" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertarArbolBResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="MostrarArbolB">
+        <s:complexType />
+      </s:element>
+      <s:element name="MostrarArbolBResponse">
+        <s:complexType />
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="getTurnoSoapIn">
@@ -718,11 +828,29 @@
   <wsdl:message name="TurnoSoapOut">
     <wsdl:part name="parameters" element="tns:TurnoResponse" />
   </wsdl:message>
+  <wsdl:message name="getAtaqueSoapIn">
+    <wsdl:part name="parameters" element="tns:getAtaque" />
+  </wsdl:message>
+  <wsdl:message name="getAtaqueSoapOut">
+    <wsdl:part name="parameters" element="tns:getAtaqueResponse" />
+  </wsdl:message>
   <wsdl:message name="setMsjFinalSoapIn">
     <wsdl:part name="parameters" element="tns:setMsjFinal" />
   </wsdl:message>
   <wsdl:message name="setMsjFinalSoapOut">
     <wsdl:part name="parameters" element="tns:setMsjFinalResponse" />
+  </wsdl:message>
+  <wsdl:message name="getWinSoapIn">
+    <wsdl:part name="parameters" element="tns:getWin" />
+  </wsdl:message>
+  <wsdl:message name="getWinSoapOut">
+    <wsdl:part name="parameters" element="tns:getWinResponse" />
+  </wsdl:message>
+  <wsdl:message name="setWinSoapIn">
+    <wsdl:part name="parameters" element="tns:setWin" />
+  </wsdl:message>
+  <wsdl:message name="setWinSoapOut">
+    <wsdl:part name="parameters" element="tns:setWinResponse" />
   </wsdl:message>
   <wsdl:message name="getMsjFinalSoapIn">
     <wsdl:part name="parameters" element="tns:getMsjFinal" />
@@ -873,6 +1001,36 @@
   </wsdl:message>
   <wsdl:message name="Top10PorcentajeSoapOut">
     <wsdl:part name="parameters" element="tns:Top10PorcentajeResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top10UnidadesDestruidasSoapIn">
+    <wsdl:part name="parameters" element="tns:Top10UnidadesDestruidas" />
+  </wsdl:message>
+  <wsdl:message name="Top10UnidadesDestruidasSoapOut">
+    <wsdl:part name="parameters" element="tns:Top10UnidadesDestruidasResponse" />
+  </wsdl:message>
+  <wsdl:message name="JuegoMayorSoapIn">
+    <wsdl:part name="parameters" element="tns:JuegoMayor" />
+  </wsdl:message>
+  <wsdl:message name="JuegoMayorSoapOut">
+    <wsdl:part name="parameters" element="tns:JuegoMayorResponse" />
+  </wsdl:message>
+  <wsdl:message name="JuegoMenorSoapIn">
+    <wsdl:part name="parameters" element="tns:JuegoMenor" />
+  </wsdl:message>
+  <wsdl:message name="JuegoMenorSoapOut">
+    <wsdl:part name="parameters" element="tns:JuegoMenorResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReceptorSoapIn">
+    <wsdl:part name="parameters" element="tns:Receptor" />
+  </wsdl:message>
+  <wsdl:message name="ReceptorSoapOut">
+    <wsdl:part name="parameters" element="tns:ReceptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="unidadAtacadaSoapIn">
+    <wsdl:part name="parameters" element="tns:unidadAtacada" />
+  </wsdl:message>
+  <wsdl:message name="unidadAtacadaSoapOut">
+    <wsdl:part name="parameters" element="tns:unidadAtacadaResponse" />
   </wsdl:message>
   <wsdl:message name="AtacarSoapIn">
     <wsdl:part name="parameters" element="tns:Atacar" />
@@ -1066,6 +1224,18 @@
   <wsdl:message name="MostrarAvlSoapOut">
     <wsdl:part name="parameters" element="tns:MostrarAvlResponse" />
   </wsdl:message>
+  <wsdl:message name="InsertarArbolBSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertarArbolB" />
+  </wsdl:message>
+  <wsdl:message name="InsertarArbolBSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertarArbolBResponse" />
+  </wsdl:message>
+  <wsdl:message name="MostrarArbolBSoapIn">
+    <wsdl:part name="parameters" element="tns:MostrarArbolB" />
+  </wsdl:message>
+  <wsdl:message name="MostrarArbolBSoapOut">
+    <wsdl:part name="parameters" element="tns:MostrarArbolBResponse" />
+  </wsdl:message>
   <wsdl:portType name="ServiceSoap">
     <wsdl:operation name="getTurno">
       <wsdl:input message="tns:getTurnoSoapIn" />
@@ -1079,9 +1249,21 @@
       <wsdl:input message="tns:TurnoSoapIn" />
       <wsdl:output message="tns:TurnoSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="getAtaque">
+      <wsdl:input message="tns:getAtaqueSoapIn" />
+      <wsdl:output message="tns:getAtaqueSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="setMsjFinal">
       <wsdl:input message="tns:setMsjFinalSoapIn" />
       <wsdl:output message="tns:setMsjFinalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getWin">
+      <wsdl:input message="tns:getWinSoapIn" />
+      <wsdl:output message="tns:getWinSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="setWin">
+      <wsdl:input message="tns:setWinSoapIn" />
+      <wsdl:output message="tns:setWinSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="getMsjFinal">
       <wsdl:input message="tns:getMsjFinalSoapIn" />
@@ -1182,6 +1364,26 @@
     <wsdl:operation name="Top10Porcentaje">
       <wsdl:input message="tns:Top10PorcentajeSoapIn" />
       <wsdl:output message="tns:Top10PorcentajeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top10UnidadesDestruidas">
+      <wsdl:input message="tns:Top10UnidadesDestruidasSoapIn" />
+      <wsdl:output message="tns:Top10UnidadesDestruidasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JuegoMayor">
+      <wsdl:input message="tns:JuegoMayorSoapIn" />
+      <wsdl:output message="tns:JuegoMayorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JuegoMenor">
+      <wsdl:input message="tns:JuegoMenorSoapIn" />
+      <wsdl:output message="tns:JuegoMenorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Receptor">
+      <wsdl:input message="tns:ReceptorSoapIn" />
+      <wsdl:output message="tns:ReceptorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="unidadAtacada">
+      <wsdl:input message="tns:unidadAtacadaSoapIn" />
+      <wsdl:output message="tns:unidadAtacadaSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="Atacar">
       <wsdl:input message="tns:AtacarSoapIn" />
@@ -1311,6 +1513,14 @@
       <wsdl:input message="tns:MostrarAvlSoapIn" />
       <wsdl:output message="tns:MostrarAvlSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="InsertarArbolB">
+      <wsdl:input message="tns:InsertarArbolBSoapIn" />
+      <wsdl:output message="tns:InsertarArbolBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MostrarArbolB">
+      <wsdl:input message="tns:MostrarArbolBSoapIn" />
+      <wsdl:output message="tns:MostrarArbolBSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1341,8 +1551,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getAtaque">
+      <soap:operation soapAction="http://henry.cccc/getAtaque" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="setMsjFinal">
       <soap:operation soapAction="http://henry.cccc/setMsjFinal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWin">
+      <soap:operation soapAction="http://henry.cccc/getWin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setWin">
+      <soap:operation soapAction="http://henry.cccc/setWin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1568,6 +1805,51 @@
     </wsdl:operation>
     <wsdl:operation name="Top10Porcentaje">
       <soap:operation soapAction="http://henry.cccc/Top10Porcentaje" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top10UnidadesDestruidas">
+      <soap:operation soapAction="http://henry.cccc/Top10UnidadesDestruidas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JuegoMayor">
+      <soap:operation soapAction="http://henry.cccc/JuegoMayor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JuegoMenor">
+      <soap:operation soapAction="http://henry.cccc/JuegoMenor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Receptor">
+      <soap:operation soapAction="http://henry.cccc/Receptor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="unidadAtacada">
+      <soap:operation soapAction="http://henry.cccc/unidadAtacada" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1863,6 +2145,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InsertarArbolB">
+      <soap:operation soapAction="http://henry.cccc/InsertarArbolB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MostrarArbolB">
+      <soap:operation soapAction="http://henry.cccc/MostrarArbolB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1893,8 +2193,35 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getAtaque">
+      <soap12:operation soapAction="http://henry.cccc/getAtaque" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="setMsjFinal">
       <soap12:operation soapAction="http://henry.cccc/setMsjFinal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWin">
+      <soap12:operation soapAction="http://henry.cccc/getWin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setWin">
+      <soap12:operation soapAction="http://henry.cccc/setWin" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2120,6 +2447,51 @@
     </wsdl:operation>
     <wsdl:operation name="Top10Porcentaje">
       <soap12:operation soapAction="http://henry.cccc/Top10Porcentaje" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top10UnidadesDestruidas">
+      <soap12:operation soapAction="http://henry.cccc/Top10UnidadesDestruidas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JuegoMayor">
+      <soap12:operation soapAction="http://henry.cccc/JuegoMayor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JuegoMenor">
+      <soap12:operation soapAction="http://henry.cccc/JuegoMenor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Receptor">
+      <soap12:operation soapAction="http://henry.cccc/Receptor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="unidadAtacada">
+      <soap12:operation soapAction="http://henry.cccc/unidadAtacada" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -2408,6 +2780,24 @@
     </wsdl:operation>
     <wsdl:operation name="MostrarAvl">
       <soap12:operation soapAction="http://henry.cccc/MostrarAvl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertarArbolB">
+      <soap12:operation soapAction="http://henry.cccc/InsertarArbolB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MostrarArbolB">
+      <soap12:operation soapAction="http://henry.cccc/MostrarArbolB" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

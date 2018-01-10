@@ -209,7 +209,7 @@ class ArbolBinario
     public string MostrarTop10Porcentaje()
     {
         
-        s = "NickName\t\tPorcentaje Destruidos" + Environment.NewLine;
+        s = "NickName\t\tPorcentaje Destruidos (%)" + Environment.NewLine;
         ArbolBinario aux = new ArbolBinario();
         EnOrdenInverso(primero, aux);
         EnOrdenC(aux.primero);
@@ -254,6 +254,140 @@ class ArbolBinario
 
     }
 
+
+    public string MostrarTop10UDestruidas()
+    {
+
+        s = "NickName\t\tPorcentaje Destruidos" + Environment.NewLine;
+        ArbolBinario aux = new ArbolBinario();
+        EnOrdenInversoD(primero, aux);
+        EnOrdenC(aux.primero);
+
+        string retorno = "";
+        string line = "";
+        int count = 0;
+        StringReader f = new StringReader(s);
+        while ((line = f.ReadLine()) != null && count < 12)
+        {
+            retorno += line;
+            retorno += Environment.NewLine;
+            count++;
+        }
+
+        return retorno;
+
+    }
+    public void EnOrdenInversoD(Nodo guia, ArbolBinario aux)
+    {
+
+        if (guia != null)
+        {
+            guia.juegos.CalcularUnidadesDestruidas();
+            EnOrdenInversoD(guia.derecho, aux);
+            if (guia.juegos.udestru != 0)
+            {
+                //if (aux.primero != null)
+                {
+                    aux.InsertarTop10(aux.primero, "" + guia.juegos.udestru, guia.Nickname);
+                }
+                //else
+                //{
+                //    aux.primero = new Nodo(guia.juegos.porcentaje + "", guia.Nickname, "", 0);
+                //}
+
+            }
+
+            EnOrdenInversoD(guia.izquiero, aux);
+
+        }
+
+    }
+
+
+    public string JuegoMayor()
+    {
+        s = "NickName Usuario\\tNickName Oponente\t\tNo Ataques" + Environment.NewLine;
+
+        NodoJuegos we = new NodoJuegos("", 0, 0, 0, 0, 0, 0);
+        string nom = "";
+
+        EnOrdeMayor(primero, ref we,ref nom);
+        
+
+        if (we != null)
+        {
+            s += " " + nom + " " + we.NickOponente + " " + we.ataques +Environment.NewLine;
+        }
+        string retorno = s;
+        return retorno;
+    }
+    
+    public void EnOrdeMayor(Nodo guia, ref NodoJuegos ret,ref string nom)
+    {
+
+        if (guia != null)
+        {
+            if (guia.juegos != null)
+            {
+                guia.juegos.ObtenerMayor();
+            }
+            
+            EnOrdeMayor(guia.derecho, ref ret,ref nom);
+            if (guia.juegos != null && guia.juegos.mayor != null && guia.juegos.mayor.ataques > ret.ataques)
+            {
+
+                ret = guia.juegos.mayor;
+                nom = guia.Nickname;
+
+            }
+
+            EnOrdeMayor(guia.izquiero,ref ret, ref nom);
+
+        }
+
+    }
+
+
+    public string JuegoMenor()
+    {
+        s = "NickName Usuario\\tNickName Oponente\t\tNo Ataques" + Environment.NewLine;
+        NodoJuegos we = new NodoJuegos("",0,0,0,0,0,0);
+        string nom = "";
+
+        EnOrdeMenor(primero, ref we,ref nom);
+        
+
+        if (we != null)
+        {
+            s += " " + nom + " " + we.NickOponente + " " + we.ataques + Environment.NewLine;
+        }
+        string retorno = s;
+        return retorno;
+    }
+
+    public void EnOrdeMenor(Nodo guia, ref NodoJuegos ret,ref string nom)
+    {
+
+        if (guia != null)
+        {
+            if (guia.juegos != null)
+            {
+                guia.juegos.ObtenerMenor();
+            }
+
+            EnOrdeMenor(guia.derecho, ref ret,ref nom);
+            if (guia.juegos != null && guia.juegos.menor != null && guia.juegos.menor.ataques < ret.ataques)
+            {
+
+                ret = guia.juegos.menor;
+                nom = guia.Nickname;
+            }
+
+            EnOrdeMenor(guia.izquiero, ref ret,ref nom);
+
+        }
+
+    }
 
 
     public int EsMenorNick(string nick1, string nick2)
@@ -1092,20 +1226,20 @@ class ArbolBinario
     }
 
 
-    public void InsertarJuego(Nodo guia,string nickBase, string nickOponente, int desplegadas, int sobrevivientes, int destruidas, Byte gano_)
+    public void InsertarJuego(Nodo guia,string nickBase, string nickOponente, int desplegadas, int sobrevivientes, int destruidas, Byte gano_,int ataque)
     {
         if (guia != null)
         {
             if (guia.Nickname.Equals(nickBase))
             {
-                guia.juegos.InsertarLD(nickOponente, desplegadas, sobrevivientes, destruidas, gano_);
+                guia.juegos.InsertarLD(nickOponente, desplegadas, sobrevivientes, destruidas, gano_,ataque);
                 
                 return;
             }
 
-            InsertarJuego(guia.izquiero, nickBase, nickOponente, desplegadas, sobrevivientes, destruidas, gano_);
+            InsertarJuego(guia.izquiero, nickBase, nickOponente, desplegadas, sobrevivientes, destruidas, gano_,ataque);
             
-            InsertarJuego(guia.derecho, nickBase, nickOponente, desplegadas, sobrevivientes, destruidas, gano_);
+            InsertarJuego(guia.derecho, nickBase, nickOponente, desplegadas, sobrevivientes, destruidas, gano_,ataque);
         }
     }
 }

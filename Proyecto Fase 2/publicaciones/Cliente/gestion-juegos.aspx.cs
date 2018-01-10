@@ -33,6 +33,19 @@ public partial class gestion_juegos : System.Web.UI.Page
             LabelTamx.Text = "Cantidad de Filas: " + a.ObtenerTamX();
             LabelTamy.Text = "Cantidad de Columnas: " + a.ObtenerTamY();
             LabelTiempo.Text = "Tiempo de Cada Partida: " + a.ObtenerTiempo();
+            
+            if (a.ObtenerModo() == 1)
+            {
+                Modo.Text = "Modo De Juego Activo es: Normal";
+            }
+            else if (a.ObtenerModo() == 2)
+            {
+                Modo.Text = "Modo De Juego Activo es: Por Tiempo";
+            }
+            else if (a.ObtenerModo() == 3)
+            {
+                Modo.Text = "Modo De Juego Activo es: Por Base";
+            }
         }
 
 
@@ -628,7 +641,13 @@ public partial class gestion_juegos : System.Web.UI.Page
             tt = -1;
         }
 
-        a.ConfigurarParametros(u0, u1, u2, u3, tt, tf, tc,DLModo.SelectedIndex);
+        int modo = 1;
+        if (DLModo.SelectedIndex != 0)
+        {
+            modo = DLModo.SelectedIndex;
+        }
+
+        a.ConfigurarParametros(u0, u1, u2, u3, tt, tf, tc,modo);
         Response.Redirect("gestion-juegos.aspx");
     }
 

@@ -77,7 +77,7 @@ public partial class gestion_usuario : System.Web.UI.Page
 
     protected void BIjuegos_Click(object sender, EventArgs e)
     {
-        a.AgregarJuego(INickBase.Text, INickOponente.Text, Convert.ToInt32(IUD.Text), Convert.ToInt32(IUS.Text), Convert.ToInt32(IUDes.Text),Convert.ToByte(IG.Text));
+        a.AgregarJuego(INickBase.Text, INickOponente.Text, Convert.ToInt32(IUD.Text), Convert.ToInt32(IUS.Text), Convert.ToInt32(IUDes.Text),Convert.ToByte(IG.Text),0);
         a.Mostrar();
         Response.Redirect("gestion-usuario.aspx");
 
@@ -253,6 +253,132 @@ public partial class gestion_usuario : System.Web.UI.Page
         Response.Redirect("gestion-usuario.aspx");
     }
 
+    protected void BSH_Click(object sender, EventArgs e)
+    {
+        if (FileUploadArbolB.FileName != "")
+        {
+
+            string line;
+            string dir = FileUploadArbolB.PostedFile.FileName;
+
+            int posicion = 0;
+
+            Stream asd = FileUploadArbolB.PostedFile.InputStream;
+
+             int ataque = 1;
+            
+             string fila ="";
+             string columna ="";
+             string unidadAtacante ="";
+             int resultado = 0; ;
+             string unidadAtacada = "";
+             string emisor = "";
+             string receptor ="";
+             string fecha =  "";
+             string tiempoR = "";
+            Boolean pri = true;
+            string aux = "";
+
+
+            //try
+            {
+                System.IO.StreamReader file = new System.IO.StreamReader(asd);
+
+
+
+                while ((line = file.ReadLine()) != null)
+                {
+                    if (pri == true)
+                    {
+                        pri = false;
+                        continue;
+                    }
+                    for (int i = 0; i < line.Length; i++)
+                    {
+                        if (line[i] != ',')
+                        {
+
+                            aux += line[i];
+                        }
+                        if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 0)
+                        {
+                            columna = aux;
+                            aux = "";
+                            posicion++;
+                        }
+                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 1)
+                        {
+                            fila = aux;
+                            aux = "";
+                            posicion++;
+                        }
+                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 2)
+                        {
+                            unidadAtacante = aux;
+                            aux = "";
+                            posicion++;
+                        }
+                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 3)
+                        {
+                            resultado = Convert.ToInt32(aux);
+                            aux = "";
+                            posicion++;
+                        }
+                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 4)
+                        {
+                            unidadAtacada = aux;
+                            aux = "";
+                            posicion++;
+                        }
+                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 5)
+                        {
+                            emisor = aux;
+                            aux = "";
+                            posicion++;
+                        }
+                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 6)
+                        {
+                            receptor = aux;
+                            aux = "";
+                            posicion++;
+                        }
+                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 7)
+                        {
+                            fecha = aux;
+                            aux = "";
+                            posicion++;
+                        }
+                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 8)
+                        {
+                            tiempoR = aux;
+                            aux = "";
+                            posicion++;
+                        }
+                        else if ((i + 1 == line.Length || line[i + 1] == ',') && posicion == 9)
+                        {
+                            ataque = Convert.ToInt32(aux);
+                            aux = "";
+                            posicion = 0;
+                        }
+
+
+                    }
+
+                    a.InsertarArbolB(ataque, fila, columna, unidadAtacante, resultado, unidadAtacada, emisor, receptor, fecha, tiempoR);
+                    a.MostrarArbolB();
+                }
+
+                file.Close();
+            }
+            //catch (Exception weq)
+            {
+                //Console.WriteLine("" + weq);
+            }
+        }
+        a.Mostrar();
+        Response.Redirect("gestion-usuario.aspx");
+    }
+
 
     protected void BSJ_Click(object sender, EventArgs e)
     {
@@ -336,7 +462,7 @@ public partial class gestion_usuario : System.Web.UI.Page
 
                     }
 
-                    a.AgregarJuego(nickBase,nickOponente,UDesplegadas,USobre,UDestru,gano);
+                    a.AgregarJuego(nickBase,nickOponente,UDesplegadas,USobre,UDestru,gano,0);
                 }
 
                 file.Close();

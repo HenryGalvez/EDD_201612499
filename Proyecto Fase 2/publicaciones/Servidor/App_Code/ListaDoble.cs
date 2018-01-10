@@ -14,21 +14,27 @@ using System.Web;
     public int count;
     public int ids;
     public double porcentaje;
+    public int udestru;
+    public NodoJuegos mayor,menor;
+    
 
     public ListaDoble()
     {
         primero = null;
         ultimo = null;
+        mayor = null;
+        menor = null;
         count = 0;
         ids = 1;
         porcentaje = 0;
+        udestru = 0;
         countganados = 0;
     }
 
-    public void InsertarLD(string nickOponente, int desplegadas, int sobrevivientes, int destruidas, Byte gano_)
+    public void InsertarLD(string nickOponente, int desplegadas, int sobrevivientes, int destruidas, Byte gano_,int ataque)
     {
 
-        NodoJuegos aux = new NodoJuegos(nickOponente, desplegadas, sobrevivientes, destruidas, gano_,ids);
+        NodoJuegos aux = new NodoJuegos(nickOponente, desplegadas, sobrevivientes, destruidas, gano_,ids,ataque);
         
         if (primero == null)
         {
@@ -147,6 +153,60 @@ using System.Web;
             porcentaje = 0;
         }
         
+    }
+
+    public void CalcularUnidadesDestruidas()
+    {
+        NodoJuegos aux = primero;
+        
+        int unidades = 0;
+        while (aux != null)
+        {
+            
+            unidades += aux.UDestruidas;
+            aux = aux.siguiente;
+        }
+
+        udestru = unidades;
+
+    }
+
+    public void ObtenerMayor()
+    {
+        NodoJuegos aux = primero;
+        NodoJuegos ret = primero;
+
+        
+        while (aux != null)
+        {
+            if (aux.ataques > ret.ataques)
+            {
+                ret = aux;
+            }
+            aux = aux.siguiente;
+        }
+
+        mayor = ret;
+
+    }
+
+    public void ObtenerMenor()
+    {
+        NodoJuegos aux = primero;
+        NodoJuegos ret = primero;
+
+
+        while (aux != null)
+        {
+            if (aux.ataques < ret.ataques)
+            {
+                ret = aux;
+            }
+            aux = aux.siguiente;
+        }
+
+        menor = ret;
+
     }
 
 

@@ -194,11 +194,47 @@
       </div>
 
 
+
+        <!--Sublir Historial-->
+        <div class="card mb-3" runat="server" id="Div1" >
+        <div class="card-header">
+          <i class="fa fa-table"></i> Arbol Historial</div>
+        <div class="card-body">
+            
+          <div class="table-responsive">
+              <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Archivo CSV Historial</label>
+                  <asp:FileUpload ID="FileUploadArbolB" accept =".csv" runat="server" />
+                
+              </div>
+              <div class="col-md-6">
+                <label for="exampleConfirmPassword">Subir</label>
+               <asp:Button ID="BSubirHistorial" runat="server" Text="Cargar" Width="100%" class="btn btn-primary btn-block" OnClick="BSH_Click"  />
+              </div>
+                
+            </div>
+
+              
+
+
+            
+          </div>
+            
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated</div>
+      </div>
+
         
 
 
         <div class="row">
         <div class="col-lg-8">
+
+
+
           <!-- Mostrar Avl-->
           
             <div class="card mb-3">
@@ -260,6 +296,7 @@
         </div>
         <div class="card-footer small text-muted">Updated</div>
       </div>
+
 
                 </ContentTemplate>
         </asp:UpdatePanel>

@@ -18,12 +18,13 @@ class Matriz
     public int fragata;
     public int crucero;
     public int submarino;
+    public string nombreD;
     
 
     public Matriz()
     {
         primero = new Pivote(1);
-        
+        nombreD = "";
         neosatelite = 1;
         bombardero = 1;
         caza = 1;
@@ -802,9 +803,12 @@ class Matriz
             if (b != null)
             {
                 b.vida -= aux.daño;
+                nombreD = b.nombre;
                 if (b.daño <= 0)
                 {
+                    nombreD = b.nombre;
                     EliminarA(pivA, b.nombre);
+                    return 3;
                 }
                 return 0;
             }

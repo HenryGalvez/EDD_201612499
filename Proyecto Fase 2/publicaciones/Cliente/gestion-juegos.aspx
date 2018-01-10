@@ -328,7 +328,7 @@
         
 
 
-        <!--mostrar usuarios-->
+        <!--Parametros-->
         <div class="card mb-3" runat="server" id="mostrar" >
         <div class="card-header">
           <i class="fa fa-table"></i> Parametros Actuales</div>
@@ -354,6 +354,9 @@
               <asp:Label ID="LabelNick1" runat="server" Text=""></asp:Label>
               <br />
               <asp:Label ID="LabelNick2" runat="server" Text=""></asp:Label>
+              <br />
+              <asp:Label ID="Modo" runat="server" Text=""></asp:Label>
+              
                 
             
           </div>

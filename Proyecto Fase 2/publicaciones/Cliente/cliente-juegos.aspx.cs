@@ -29,6 +29,11 @@ public partial class _Default : System.Web.UI.Page
     static int modo = 0;
     static int player = 0;
     static int tiempo=0;
+
+    static int uT = 0;
+    static int uS = 0;
+    static int uD = 0;
+    static Boolean win = false;
     
 
     static Boolean estacion = false,temporizador = false,normal = false;
@@ -116,6 +121,7 @@ public partial class _Default : System.Web.UI.Page
         if (nivel != -1)
         {
             int s = a.InsertarUnidadesMatriz("" + Session["usuario"], tipo, IFila.SelectedValue.Trim(), IColumna.SelectedValue.Trim(), 1, nivel);
+            ++uT;
             if (s == -1)
             {
                 labelMsjC.Text = "*******Coordenada Con Obstaculo";
@@ -255,6 +261,7 @@ public partial class _Default : System.Web.UI.Page
         //BFinalizar.Enabled = true;
         Comenzar.Enabled = false;
         //ac = true;
+        uS = uT;
         int inicio = 65, final = Tamy + 65;
         string cadena = "A";
         int primerContador = 65;
@@ -384,6 +391,7 @@ public partial class _Default : System.Web.UI.Page
             labelMsj.Text = " *********Unidad No Valida";
             DLAtacar.Items.Remove(DLMove.SelectedValue);
             DLMove.Items.Remove(DLMove.SelectedValue);
+            --uS;
         }
         else if (s == 0)
         {
@@ -406,6 +414,7 @@ public partial class _Default : System.Web.UI.Page
             a.MansarMensaje("usuario: " + Session["usuario"] + " Movio a la la Posicion (" + IFilNue.Text + "," + IColNue.Text + "," + nivel + ")" +
                 " Capturo la Base Enemiga " + Environment.NewLine + labelConsola.Text);
             a.setMsjFinal("El Usuario " + Session["usuario"] + " Capturo la Bandera Enemiga" + Environment.NewLine + "PARTIDA TERMINADA");
+            win = true;
         }
 
 
@@ -469,6 +478,7 @@ public partial class _Default : System.Web.UI.Page
             nivel = 0;
 
         }
+        int resultado = 0;
         if (DLNivel.SelectedIndex == 1 && a.EsBase(IFilAm.SelectedValue, IColA.SelectedValue) == true)
         {
             BMover.Enabled = false;
@@ -490,11 +500,28 @@ public partial class _Default : System.Web.UI.Page
             else if (s == 0)
             {
                 labelMsjA.Text = " *********Disparo acertado";
+                resultado = 0;
             }
             else if (s == 1)
             {
                 labelMsjA.Text = " *********Disparo sin Exito";
+                
+            } else if (s == 3)
+            {
+                labelMsjA.Text = " *********Disparo con Exito Unidad destruida";
+                resultado = 1;
+                ++uD;
             }
+            try
+            {
+                a.InsertarArbolB(a.getAtaque(), IFilAm.SelectedValue, IColA.SelectedValue, DLAtacar.SelectedValue, resultado, a.unidadAtacada(), "" + Session["usuario"], a.Receptor(player), DateTime.Now.ToString(), labelTiempo.Text);
+                a.MostrarArbolB();
+            }
+            catch (Exception ed)
+            {
+
+            }
+            
         }
         
         
@@ -550,6 +577,7 @@ public partial class _Default : System.Web.UI.Page
             --uni0;
         }
         a.EliminarUnidades(DLEliminar.SelectedValue, nivel);
+        --uT;
         //a.setActualizar(true);
         DLMove.Items.Remove(tipo);
         DLEliminar.Items.Remove(tipo);
@@ -560,7 +588,7 @@ public partial class _Default : System.Web.UI.Page
     }
     static int segundos = 0;
     static Boolean de = false;
-    
+    static Boolean finPri = false;
     protected void Timer1_Tick(object sender, EventArgs e)
     {
         a.VerificarUnidades();
@@ -628,6 +656,18 @@ public partial class _Default : System.Web.UI.Page
             BMover.Enabled = false;
             BAtacar.Enabled = false;
             BFinalizar.Enabled = false;
+            if (finPri == false && a.getWin() == player)
+            {
+                a.AgregarJuego("" + Session["usuario"], a.Receptor(player), uT, uS, (uT - uS), 1, a.getAtaque());
+                finPri = true;
+            }
+            else if (finPri == false && a.getWin() != player)
+            {
+                a.AgregarJuego("" + Session["usuario"], a.Receptor(player), uT, uS, (uT - uS), 0, a.getAtaque());
+                finPri = true;
+            }
+            
+
         }
 
                 

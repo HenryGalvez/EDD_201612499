@@ -56,6 +56,12 @@ public partial class reportes : System.Web.UI.Page
         TDN2.ImageUrl = Matriz("matrizNivel1Destruido");
         TDN3.ImageUrl = Matriz("matrizNivel2Destruido");
         TDN4.ImageUrl = Matriz("matrizNivel3Destruido");
+
+        a.MostrarArbolB();
+        arbolb.ImageUrl = a.RetornarCandena(@"C:\EDD\arbolb\grafoarbolb.jpg");
+        labelTop10Destruidos.Text = "Top 10 de usuario con más unidades eliminadas: " + Environment.NewLine + a.Top10UnidadesDestruidas();
+        labelJuegoMayor.Text = "Juego con mas ataques realizados para su finalización: " + Environment.NewLine + a.JuegoMayor();
+        labelJuegoMenor.Text = "Juego con menos ataques realizados para su finalización: " + Environment.NewLine + a.JuegoMenor();
     }
     protected void Timer1_Tick(object sender, EventArgs e)
     {

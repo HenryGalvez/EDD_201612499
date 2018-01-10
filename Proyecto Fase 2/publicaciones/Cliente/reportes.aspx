@@ -157,10 +157,25 @@
         <div class="card-footer small text-muted">Updated</div>
       </div>
 
+
+                <!--Arbol B-->
+        <div class="card mb-3" runat="server" id="Div6" >
+        <div class="card-header">
+          <i class="fa fa-table"></i> Arbol B Historial</div>
+        <div class="card-body">
+            
+          <div class="table-responsive">
+              <asp:Image ID="arbolb" runat="server" width="1000" />
+            
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated</div>
+      </div>
+
         <!--mostrar Tabla Hash-->
         <div class="card mb-3" runat="server" id="Div5" >
         <div class="card-header">
-          <i class="fa fa-table"></i> Arbol Binario Espejo</div>
+          <i class="fa fa-table"></i> Tabla Hash</div>
         <div class="card-body">
             
           <div class="table-responsive">
@@ -197,6 +212,16 @@
               <br />
               <br />
               <asp:TextBox ID="labelTop10Contactos" runat="server" Height="179px" ReadOnly="True" TextMode="MultiLine" Width="1050px"></asp:TextBox>
+
+              <br />
+              <br />
+              <asp:TextBox ID="labelTop10Destruidos" runat="server" Height="179px" ReadOnly="True" TextMode="MultiLine" Width="1050px"></asp:TextBox>
+              <br />
+              <br />
+              <asp:TextBox ID="labelJuegoMayor" runat="server" Height="179px" ReadOnly="True" TextMode="MultiLine" Width="1050px"></asp:TextBox>
+              <br />
+              <br />
+              <asp:TextBox ID="labelJuegoMenor" runat="server" Height="179px" ReadOnly="True" TextMode="MultiLine" Width="1050px"></asp:TextBox>
             
           </div>
         </div>

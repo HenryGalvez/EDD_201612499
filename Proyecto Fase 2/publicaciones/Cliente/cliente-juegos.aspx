@@ -395,7 +395,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
 
-                            <asp:Label ID="labelTiempo" runat="server">Tiempo Restante: --:--</asp:Label>
+                            <label >Tiempo Restante: </label><asp:Label ID="labelTiempo" runat="server">--:--</asp:Label>
                             <br />
                             <br />
                             <br />
