@@ -1,0 +1,7 @@
+C:\Users\Usuario\Desktop\2S2017\vacaciones\estructuras\Proyecto\ArbolB\ArbolB\bin\Debug\ArbolB.exe.config
+C:\Users\Usuario\Desktop\2S2017\vacaciones\estructuras\Proyecto\ArbolB\ArbolB\bin\Debug\ArbolB.exe
+C:\Users\Usuario\Desktop\2S2017\vacaciones\estructuras\Proyecto\ArbolB\ArbolB\bin\Debug\ArbolB.pdb
+C:\Users\Usuario\Desktop\2S2017\vacaciones\estructuras\Proyecto\ArbolB\ArbolB\obj\Debug\ArbolB.csprojResolveAssemblyReference.cache
+C:\Users\Usuario\Desktop\2S2017\vacaciones\estructuras\Proyecto\ArbolB\ArbolB\obj\Debug\ArbolB.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\2S2017\vacaciones\estructuras\Proyecto\ArbolB\ArbolB\obj\Debug\ArbolB.exe
+C:\Users\Usuario\Desktop\2S2017\vacaciones\estructuras\Proyecto\ArbolB\ArbolB\obj\Debug\ArbolB.pdb
